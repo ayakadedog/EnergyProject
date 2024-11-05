@@ -1,7 +1,11 @@
 package com.energy.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.energy.entity.CHome;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.energy.result.Result;
+
+import java.util.List;
 
 /**
 * @author lenovo
@@ -10,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CHomeService extends IService<CHome> {
 
+    Page getHomeInfo(int page, int pageSize);
 }
