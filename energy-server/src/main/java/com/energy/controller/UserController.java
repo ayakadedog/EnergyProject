@@ -1,11 +1,13 @@
 package com.energy.controller;
 
+import cn.hutool.crypto.digest.BCrypt;
 import com.energy.constant.JwtClaimsConstant;
 import com.energy.constant.MessageConstant;
 import com.energy.context.BaseContext;
 import com.energy.dto.UserLoginDTO;
 import com.energy.entity.User;
 import com.energy.exception.BaseException;
+import com.energy.exception.PasswordErrorException;
 import com.energy.properties.JwtProperties;
 import com.energy.result.Result;
 import com.energy.service.UserService;
@@ -31,19 +33,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Result<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request){
-        if(userLoginDTO == null||userLoginDTO.getUsername()==null){
+    public Result<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) {
+        if (userLoginDTO == null || userLoginDTO.getUsername() == null) {
             return Result.error(MessageConstant.ACCOUNT_NOT_NULL);
         }
-        if(userLoginDTO.getPassword()==null){
+        if (userLoginDTO.getPassword() == null) {
             return Result.error(MessageConstant.PASSWORD_NOT_NULL);
         }
-        userService.login(userLoginDTO,request);
+        userService.login(userLoginDTO, request);
 
         return Result.success(MessageConstant.LOGIN_SUCCESS);
     }
-
-
 
 
     /**

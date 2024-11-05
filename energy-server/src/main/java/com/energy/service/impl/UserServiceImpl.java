@@ -50,8 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
         }
-        request.setAttribute(MessageConstant.LOGIN_USER,user);
-
+        request.getSession().setAttribute(MessageConstant.LOGIN_USER, user);
         //3、返回实体对象
         return user;
     }
