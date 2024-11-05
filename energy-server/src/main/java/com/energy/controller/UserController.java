@@ -31,7 +31,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Result<String> login(UserLoginDTO userLoginDTO, HttpServletRequest request){
+    public Result<String> login(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request){
         if(userLoginDTO == null||userLoginDTO.getUsername()==null){
             return Result.error(MessageConstant.ACCOUNT_NOT_NULL);
         }
