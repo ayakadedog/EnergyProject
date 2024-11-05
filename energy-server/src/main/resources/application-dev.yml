@@ -3,7 +3,7 @@ sky:
     driver-class-name: com.mysql.cj.jdbc.Driver
     host: sh-cynosdbmysql-grp-j7caw66y.sql.tencentcdb.com
     port: 24148
-    database: Xanadu
+    database: energy
     username: root
     password: Hyf20021004
 
