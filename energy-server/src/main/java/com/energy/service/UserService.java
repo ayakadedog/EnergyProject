@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.energy.dto.UserLoginDTO;
 import com.energy.entity.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService extends IService<User> {
 
     /**
@@ -11,6 +13,6 @@ public interface UserService extends IService<User> {
      * @param userLoginDTO
      * @return
      */
-    User login(UserLoginDTO userLoginDTO);
+    User login(UserLoginDTO userLoginDTO, HttpServletRequest request);
 
 }
