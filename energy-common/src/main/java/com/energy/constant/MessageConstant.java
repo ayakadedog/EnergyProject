@@ -7,8 +7,14 @@ package com.energy.constant;
  */
 public class MessageConstant {
 
+    public static final String ACCOUNT_NOT_NULL = "账号不能为空";
+    public static final String PASSWORD_NOT_NULL = "请输入密码";
+    public static final String LOGIN_SUCCESS = "登录成功";
+    public static final String LOGIN_USER = "登录用户";
+
     public static final String PASSWORD_ERROR = "密码错误";
     public static final String ACCOUNT_NOT_FOUND = "账号不存在";
+
     public static final String ACCOUNT_LOCKED = "账号被锁定";
     public static final String ALREADY_EXISTS ="已存在";
     public static final String UNKNOWN_ERROR = "未知错误";
@@ -20,6 +26,7 @@ public class MessageConstant {
     public static final String EDIT_SUCCESS = "修改成功";
     public static final String DISH_DEL_SUC = "删除成功";
     public static final String ADD_SUC = "添加成功";
+
 
 
 }
