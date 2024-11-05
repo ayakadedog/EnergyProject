@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.energy.mapper.CProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.energy.entity.CProduct">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="scenarioId" column="scenario_id" jdbcType="BIGINT"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,scenario_id,url,
+        title,content
+    </sql>
+</mapper>
