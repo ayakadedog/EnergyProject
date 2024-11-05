@@ -33,6 +33,9 @@ logging:
         service: info
         controller: info
 
+reggie:
+  path: D:\energyProject\springboot-template-master\springboot-template-master\energy-server\src\main\resources\templates\picture
+
 restaurant:
   jwt:
     # 设置jwt签名加密时使用的秘钥
