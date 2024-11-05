@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   profiles:
@@ -34,7 +34,7 @@ logging:
         controller: info
 
 reggie:
-  path: D:\energyProject\springboot-template-master\springboot-template-master\energy-server\src\main\resources\templates\picture
+  path: D:\energyProject\springboot-template-master\springboot-template-master\energy-server\src\main\resources\templates\picture\
 
 restaurant:
   jwt:
