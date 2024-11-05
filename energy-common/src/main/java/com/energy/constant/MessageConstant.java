@@ -24,7 +24,7 @@ public class MessageConstant {
     public static final String PASSWORD_EDIT_FAILED = "密码修改失败";
     public static final String PASSWORD_EDIT_SUCCESS = "密码修改成功";
     public static final String EDIT_SUCCESS = "修改成功";
-    public static final String DISH_DEL_SUC = "删除成功";
+    public static final String DELETE_SUC = "删除成功";
     public static final String ADD_SUC = "添加成功";
 
 
