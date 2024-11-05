@@ -39,16 +39,16 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addInterceptors(InterceptorRegistry registry) {
-        log.info("开始注册自定义拦截器...");
-        registry.addInterceptor(jwtTokenAdminInterceptor)
-                .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/employee/login")
-                        .excludePathPatterns("/admin/chart/page");
-        registry.addInterceptor(jwtTokenUserInterceptor)
-                .addPathPatterns("/user/**")
-                .excludePathPatterns("/dev-api/api/user/login")
-                .excludePathPatterns("/dev-api/api/user/info")
-                .excludePathPatterns("/user/shop/status");
+//        log.info("开始注册自定义拦截器...");
+//        registry.addInterceptor(jwtTokenAdminInterceptor)
+//                .addPathPatterns("/admin/**")
+//                .excludePathPatterns("/admin/employee/login")
+//                        .excludePathPatterns("/admin/chart/page");
+//        registry.addInterceptor(jwtTokenUserInterceptor)
+//                .addPathPatterns("/user/**")
+//                .excludePathPatterns("/dev-api/api/user/login")
+//                .excludePathPatterns("/dev-api/api/user/info")
+//                .excludePathPatterns("/user/shop/status");
     }
 
     /**
@@ -78,8 +78,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
 //        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        registry.addResourceHandler("/templates/front/en/**").addResourceLocations("classpath:/templates/front/en/");
-        registry.addResourceHandler("/templates/front/cn/**").addResourceLocations("classpath:/templates/front/cn/");
+        registry.addResourceHandler("/templates/front/**").addResourceLocations("classpath:/templates/front/");
+        registry.addResourceHandler("/templates/backend/**").addResourceLocations("classpath:/templates/backend/");
+
     }
 
 
