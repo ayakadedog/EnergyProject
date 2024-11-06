@@ -24,5 +24,7 @@ public class CComment implements Serializable {
 
     private Date createTime;
 
+    private String name;
+
     private static final long serialVersionUID = 1L;
 }
