@@ -1,11 +1,17 @@
 package com.energy.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.energy.entity.CProduct;
+import com.energy.entity.CScenario;
 import com.energy.mapper.CProductMapper;
+import com.energy.result.Result;
 import com.energy.service.CProductService;
+import com.energy.service.CScenarioService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +23,9 @@ import java.util.List;
 public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
         implements CProductService {
 
+    @Resource
+    private CScenarioService scenarioService;
+
     @Override
     public void modifyStatus(Integer stu, List<Long> list) {
         for (Long id : list) {
@@ -25,6 +34,31 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
             this.updateById(dish);
         }
     }
+
+    @Override
+    public Page<CProduct> getPage(Integer page, Integer pageSize, String name) {
+        //构造分页构造器对象
+        Page<CProduct> pageInfo = new Page<>(page, pageSize);
+
+        //条件构造器
+        LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
+        //添加过滤条件
+        queryWrapper.like(name != null, CProduct::getTitle, name);
+        //添加排序条件
+        queryWrapper.orderByDesc(CProduct::getCreateTime);
+        this.page(pageInfo, queryWrapper);
+        pageInfo.getRecords().forEach(record -> {
+            // 假设 CProduct 中有 getCScenarioId 方法，并且 scenarioService.getById 返回 Scenario 对象
+            String scenarioTitle = scenarioService.getById(record.getScenarioId()).getTitle();
+            // 将 scenario 的 title 设置到 CProduct 中（假设 CProduct 中有 setScenarioTitle 方法）
+            record.setScenario(scenarioTitle);
+        });
+
+        return pageInfo;
+
+    }
+
+
 }
 
 

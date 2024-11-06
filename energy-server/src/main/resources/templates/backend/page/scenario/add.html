@@ -72,17 +72,17 @@
                             maxlength="20"
                     />
                 </el-form-item>
-                <el-form-item
-                        label="使用场景:"
-                        prop="scenarioId"
-                >
-                    <el-select
-                            v-model="ruleForm.scenarioId"
-                            placeholder="请选择使用场景"
-                    >
-                        <el-option v-for="(item,index) in scenario" :key="index" :label="item.title" :value="item.id"/>
-                    </el-select>
-                </el-form-item>
+<!--                <el-form-item-->
+<!--                        label="使用场景:"-->
+<!--                        prop="scenarioId"-->
+<!--                >-->
+<!--                    <el-select-->
+<!--                            v-model="ruleForm.scenarioId"-->
+<!--                            placeholder="请选择使用场景"-->
+<!--                    >-->
+<!--                        <el-option v-for="(item,index) in scenario" :key="index" :label="item.title" :value="item.id"/>-->
+<!--                    </el-select>-->
+<!--                </el-form-item>-->
             </div>
 
             <div>
@@ -166,7 +166,7 @@
 <script src="../../js/request.js"></script>
 <script src="../../js/validate.js"></script>
 <script src="../../js/index.js"></script>
-<script src="../../api/product.js"></script>
+<script src="../../api/scenario.js"></script>
 <script>
     new Vue({
         el: '#food-add-app',
@@ -201,9 +201,9 @@
                     'title': [
                         {'required': true, 'message': '请填写产品名称', 'trigger': 'blur'}
                     ],
-                    'scenarioId': [
-                        {'required': true, 'message': '请选择使用场景', 'trigger': 'change'}
-                    ],
+                    // 'scenarioId': [
+                    //     {'required': true, 'message': '请选择使用场景', 'trigger': 'change'}
+                    // ],
                     'price': [
                         {
                             'required': true,
@@ -361,7 +361,7 @@
 
             goBack() {
                 window.parent.menuHandle({
-                    url: '/templates/backend/page/product/list.html'
+                    url: '/templates/backend/page/scenario/list.html'
                 }, false)
             }
         }

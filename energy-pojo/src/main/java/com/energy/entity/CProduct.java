@@ -31,5 +31,6 @@ public class CProduct implements Serializable {
 
     @TableField(exist = false)
     private String scenario;
+
     private static final long serialVersionUID = 1L;
 }

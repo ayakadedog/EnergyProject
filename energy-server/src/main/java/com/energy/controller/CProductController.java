@@ -35,19 +35,15 @@ public class CProductController {
 
 
     @GetMapping("/page")
-    public Result<Page> page(int page, int pageSize, String name) {
+    public Result<Page> page(Integer page, Integer pageSize, String name) {
+        if (page == null || page <= 0) {
+            page = 1;
+        }
+        if (pageSize == null || pageSize <= 0) {
+            pageSize = 10;
+        }
 
-        //构造分页构造器对象
-        Page<CProduct> pageInfo = new Page<>(page, pageSize);
-
-        //条件构造器
-        LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
-        //添加过滤条件
-        queryWrapper.like(name != null, CProduct::getTitle, name);
-        //添加排序条件
-        queryWrapper.orderByDesc(CProduct::getCreateTime);
-
-        return Result.success(productService.page(pageInfo, queryWrapper));
+        return Result.success(productService.getPage(page, pageSize,name));
     }
 
 

@@ -87,5 +87,9 @@ public class CScenarioController {
         return Result.success(MessageConstant.EDIT_SUCCESS);
     }
 
+    @GetMapping("/list")
+    public Result<List<CScenario>> list() {
 
+        return Result.success(scenarioService.list(new LambdaQueryWrapper<CScenario>()));
+    }
 }
