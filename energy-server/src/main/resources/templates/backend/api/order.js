@@ -1,16 +1,24 @@
 // 查询列表页接口
 const getOrderDetailPage = (params) => {
   return $axios({
-    url: '/order/page',
+    url: '/cn/contact-us/page',
     method: 'get',
     params
+  })
+}
+
+const deleteById = (id) => {
+  return $axios({
+    url: `/cn/contact-us/orderDetail/${id}`,
+    method: 'delete',
+    id
   })
 }
 
 // 查看接口
 const queryOrderDetailById = (id) => {
   return $axios({
-    url: `/orderDetail/${id}`,
+    url: `cn/orderDetail/${id}`,
     method: 'get'
   })
 }
@@ -18,7 +26,7 @@ const queryOrderDetailById = (id) => {
 // 取消，派送，完成接口
 const editOrderDetail = (params) => {
   return $axios({
-    url: '/order',
+    url: 'cn/order',
     method: 'put',
     data: { ...params }
   })

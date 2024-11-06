@@ -1,13 +1,13 @@
 const sendMessage = (data) => {
     return $axios({
-        url: '/contact-us/sendMessage',
+        url: '/cn/contact-us/sendMessage',
         method: 'post',
         data
     })
 }
 const getCompany = (params) => {
     return $axios({
-        url: '/contact-us/sendMessage',
+        url: '',
         method: 'get',
         params
     })

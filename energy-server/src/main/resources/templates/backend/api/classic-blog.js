@@ -1,14 +1,14 @@
 
 const supportList = (params) => {
     return $axios({
-        url: '/contact-us/sendMessage',
+        url: '',
         method: 'get',
         params
     })
 }
 const supportDetail = (id) => {
     return $axios({
-        url: '/contact-us/sendMessage',
+        url: '',
         method: 'get',
         id
     })

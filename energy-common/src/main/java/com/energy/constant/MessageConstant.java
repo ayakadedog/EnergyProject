@@ -27,6 +27,8 @@ public class MessageConstant {
     public static final String DELETE_SUC = "删除成功";
     public static final String ADD_SUC = "添加成功";
 
+    public static final String Send_SUC = "发送成功";
+
 
 
 }
