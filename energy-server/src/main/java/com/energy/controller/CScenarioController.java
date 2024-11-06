@@ -3,6 +3,7 @@ package com.energy.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.energy.constant.MessageConstant;
+import com.energy.entity.CProduct;
 import com.energy.entity.CScenario;
 import com.energy.result.Result;
 import com.energy.service.CScenarioService;
@@ -91,5 +92,13 @@ public class CScenarioController {
     public Result<List<CScenario>> list() {
 
         return Result.success(scenarioService.list(new LambdaQueryWrapper<CScenario>()));
+    }
+
+    @GetMapping("/type")
+    public Result<List<CScenario>> orderByType(@RequestParam(required = false) String type){
+
+        List<CScenario> list = scenarioService.orderByType(type);
+
+        return Result.success(list);
     }
 }

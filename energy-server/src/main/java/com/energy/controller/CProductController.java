@@ -85,5 +85,11 @@ public class CProductController {
         return Result.success(MessageConstant.EDIT_SUCCESS);
     }
 
+    @GetMapping("/type")
+    public Result<List<CProduct>> orderByType(@RequestParam(required = false) String type){
 
+        List<CProduct> list = productService.orderByType(type);
+
+        return Result.success(list);
+    }
 }

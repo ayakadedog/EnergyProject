@@ -37,4 +37,8 @@ public class CHomeController {
         return Result.success(homeService.getById(id));
     }
 
+    @GetMapping("/list")
+    public Result<Page> homeList() {
+        return Result.success(homeService.getHomeInfo(1,10));
+    }
 }

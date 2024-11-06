@@ -58,6 +58,13 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
 
     }
 
+    @Override
+    public List<CProduct> orderByType(String type) {
+        LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(type != null, CProduct::getScenarioId, type);
+        return this.list(queryWrapper);
+    }
+
 
 }
 

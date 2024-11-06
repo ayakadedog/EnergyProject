@@ -15,6 +15,10 @@ import lombok.Data;
 public class CHome implements Serializable {
     private Long id;
 
+    private String title;
+
+    private String content;
+
     private String url;
 
     private static final long serialVersionUID = 1L;

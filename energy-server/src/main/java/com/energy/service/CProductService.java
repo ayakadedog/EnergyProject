@@ -16,4 +16,6 @@ public interface CProductService extends IService<CProduct> {
     void modifyStatus(Integer stu, List<Long> ids);
 
     Page<CProduct> getPage(Integer page, Integer pageSize, String name);
+
+    List<CProduct> orderByType(String type);
 }

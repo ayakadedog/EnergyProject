@@ -1,6 +1,8 @@
 package com.energy.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.energy.entity.CProduct;
 import com.energy.entity.CScenario;
 import com.energy.mapper.CScenarioMapper;
 import com.energy.service.CScenarioService;
@@ -24,6 +26,13 @@ public class CScenarioServiceImpl extends ServiceImpl<CScenarioMapper, CScenario
             dish.setStatus(stu);
             this.updateById(dish);
         }
+    }
+
+    @Override
+    public List<CScenario> orderByType(String type) {
+        LambdaQueryWrapper<CScenario> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(type != null, CScenario::getId, type);
+        return this.list(queryWrapper);
     }
 }
 
