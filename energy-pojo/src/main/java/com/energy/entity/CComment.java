@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public class CComment implements Serializable {
 
     private String email;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private String name;
 

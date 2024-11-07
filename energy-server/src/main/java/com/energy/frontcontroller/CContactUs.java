@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/cn/contact-us")
@@ -22,7 +23,7 @@ public class CContactUs {
 
     @PostMapping("/sendMessage")
     public Result<String> addComment(@RequestBody CComment comment){
-        comment.setCreateTime(DateTime.now());
+        comment.setCreateTime(LocalDateTime.now());
         comment.setPhone(null);
         cCommentService.save(comment);
         return Result.success(MessageConstant.Send_SUC);

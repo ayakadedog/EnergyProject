@@ -7,6 +7,13 @@ const getCSupportPage = (params) => {
   })
 }
 
+const getFrontCSupportPage = (params) => {
+  return $axios({
+    url: '/cn/classicBlog/frontpage',
+    method: 'get',
+    params
+  })
+}
 // 删除数据接口
 const deleteServices = (ids) => {
   return $axios({
