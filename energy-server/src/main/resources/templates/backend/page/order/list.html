@@ -238,7 +238,7 @@
               'type': 'warning'
             }).then(() => {
               deleteById(id).then(res => {
-                if (res.code === 1) {
+                if (res.code === 20000) {
                   this.$message.success('删除成功！')
                   this.handleQuery()
                 } else {

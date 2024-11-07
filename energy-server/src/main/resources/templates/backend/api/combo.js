@@ -1,16 +1,16 @@
 // 查询列表数据
-const getSetmealPage = (params) => {
+const getCSupportPage = (params) => {
   return $axios({
-    url: '/setmeal/page',
+    url: '/cn/classicBlog/page',
     method: 'get',
     params
   })
 }
 
 // 删除数据接口
-const deleteSetmeal = (ids) => {
+const deleteServices = (ids) => {
   return $axios({
-    url: '/setmeal',
+    url: '/cn/classicBlog/deleteServices',
     method: 'delete',
     params: { ids }
   })
@@ -35,9 +35,9 @@ const addSetmeal = (params) => {
 }
 
 // 查询详情接口
-const querySetmealById = (id) => {
+const getDetailById = (id) => {
   return $axios({
-    url: `/setmeal/${id}`,
+    url: `cn/classicBlog/getServiceDetail/${id}`,
     method: 'get'
   })
 }

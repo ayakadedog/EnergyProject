@@ -749,6 +749,7 @@
             .then(response => {
                 document.getElementById('form-output-global').style.display='block';
                 // 处理成功的响应
+                location.reload();
                 console.log('发送成功', response.data);
                 // 可以在这里添加一些用户反馈，比如显示一个成功消息
                 setTimeout(function() {

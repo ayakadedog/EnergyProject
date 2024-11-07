@@ -80,3 +80,19 @@ const dishStatusByStatus = (params) => {
     params: { ids: params.id }
   })
 }
+
+const addService = (data) => {
+  return $axios({
+    url: `/cn/classicBlog/addService`,
+    method: 'post',
+    data
+  })
+}
+
+const updateService = (data) => {
+  return $axios({
+    url: `/cn/classicBlog/updateService`,
+    method: 'post',
+    data
+  })
+}
