@@ -27,6 +27,8 @@ public class CProduct implements Serializable {
 
     private Integer status;
 
+    private String picture;
+
     private LocalDateTime createTime;
 
     @TableField(exist = false)

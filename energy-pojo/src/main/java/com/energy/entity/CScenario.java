@@ -25,6 +25,8 @@ public class CScenario implements Serializable {
 
     private Integer status;
 
+    private String picture;
+
     private LocalDateTime createTime;
 
     private static final long serialVersionUID = 1L;
