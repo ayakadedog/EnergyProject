@@ -9,51 +9,139 @@
     <link rel="stylesheet" href="../../plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="../../styles/common.css"/>
     <link rel="stylesheet" href="../../styles/page.css"/>
+    <style>
+        .selectInput {
+            position: relative;
+            width: 100%;
+            min-width: 100px;
+        }
+
+        .selectInput .flavorSelect {
+            position: absolute;
+            width: 100%;
+            padding: 0 10px;
+            border-radius: 3px;
+            border: solid 1px #FF903D;
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            top: 50px;
+            z-index: 99;
+        }
+
+        .selectInput .flavorSelect .items {
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            line-height: 35px;
+            border-bottom: solid 1px #f4f4f4;
+            color: #666;
+        }
+
+        .selectInput .flavorSelect .none {
+            font-size: 14px;
+        }
+
+        #food-add-app .uploadImg .el-form-item__label::before {
+            content: '*';
+            color: #F56C6C;
+            margin-right: 4px;
+        }
+
+    </style>
 </head>
 <body>
-<div class="addBrand-container" id="member-add-app">
+<div class="addBrand-container" id="food-add-app">
     <div class="container">
         <el-form
                 ref="ruleForm"
                 :model="ruleForm"
-                :inline="false"
+                :rules="rules"
+                :inline="true"
                 label-width="180px"
                 class="demo-ruleForm"
         >
-            <el-upload
-                    class="upload-demo"
-                    drag
-                    action="/common/upload"
-                    :show-file-list="false"
-                    :on-success="handleAvatarSuccess"
-                    :on-change="onChange"
-                    ref="upload"
-            >
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">将图片拖到此处，或<em>点击上传</em></div>
-                <div>
-                    <img
-                            v-if="imageUrl"
-                            :src="imageUrl"
-                            class="avatar"
+            <div>
+                <el-form-item
+                        label="标题名称:"
+                        prop="title"
+                >
+                    <el-input
+                            v-model="ruleForm.title"
+                            placeholder="请填写标题名称"
+                            maxlength="20"
                     />
-                    <i
-                            v-else
-                            class="el-icon-plus avatar-uploader-icon"
-                    ></i>
-                </div>
-            </el-upload>
+                </el-form-item>
+            </div>
+
+            <div class="address">
+                <el-form-item
+                        label="标题描述:"
+                        prop="text"
+                >
+                    <el-input
+                            v-model="ruleForm.content"
+                            type="textarea"
+                            :rows="3"
+                            placeholder="标题描述，最长200字"
+                            maxlength="200"
+                    />
+                </el-form-item>
+            </div>
+
+            <div>
+                <el-form-item
+                        label="轮播图片:"
+                        prop="region"
+                        class="uploadImg"
+                >
+                    <el-upload
+                            class="upload-demo"
+                            drag
+                            action="/common/upload"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :on-change="onChange"
+                            ref="upload"
+                    >
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将图片拖到此处，或<em>点击上传</em></div>
+                        <div>
+                            <img
+                                    v-if="imageUrl"
+                                    :src="imageUrl"
+                                    style="display: block; width: 100%; height: auto; object-fit: contain;"
+                            />
+                            <i
+                                    v-else
+                                    class="el-icon-plus avatar-uploader-icon"
+                            ></i>
+                        </div>
+                    </el-upload>
+
+                </el-form-item>
+            </div>
 
             <div class="subBox address">
-                <el-button @click="goBack()">
-                    取消
-                </el-button>
-                <el-button
-                        type="primary"
-                        @click="submitForm('ruleForm', false)"
-                >
-                    保存
-                </el-button>
+                <el-form-item>
+                    <el-button @click="goBack()">
+                        取消
+                    </el-button>
+                    <el-button
+                            type="primary"
+                            @click="submitForm('ruleForm')"
+                    >
+                        保存
+                    </el-button>
+                    <el-button
+                            v-if="actionType == 'add'"
+                            type="primary"
+                            class="continue"
+                            @click="submitForm('ruleForm','goAnd')"
+                    >
+                        保存并继续添加
+                    </el-button>
+                </el-form-item>
             </div>
         </el-form>
     </div>
@@ -65,19 +153,52 @@
 <!-- 引入axios -->
 <script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
-<script src="../../api/home.js"></script>
 <script src="../../js/validate.js"></script>
 <script src="../../js/index.js"></script>
+<script src="../../api/home.js"></script>
 <script>
     new Vue({
-        el: '#member-add-app',
+        el: '#food-add-app',
         data() {
             return {
+                id: '',
+                restKey: 0,
+                textarea: '',
+                value: '',
                 imageUrl: '',
-                ruleForm: {}
+                actionType: '',
+                scenario: [],
+                dishFlavorsData: [],
+                dishFlavors: [],
+                vueRest: '1',
+                index: 0,
+                inputStyle: {'flex': 1},
+                ruleForm: {
+                    'title': '',
+                    'id': '',
+                    'url': '',
+                    'content': '',
+                    'scenarioId': '',
+                    'status': 0
+                },
+                mak: false
             }
         },
-        computed: {},
+        computed: {
+            rules() {
+                return {
+                    'title': [
+                        {'required': true, 'message': '请填写产品名称', 'trigger': 'blur'}
+                    ],
+                    'price': [
+                        {
+                            'required': true,
+                            'trigger': 'blur'
+                        }
+                    ],
+                }
+            }
+        },
         created() {
             this.id = requestUrlParam('id')
             this.actionType = this.id ? 'edit' : 'add'
@@ -91,30 +212,95 @@
             async init() {
                 queryHomeById(this.id).then(res => {
                     console.log(res)
+                    console.error(res.data)
                     if (String(res.code) === '20000') {
-                        console.log(res.data);
-                        this.imageUrl = `/common/download?name=${res.data.url}`;
+                        this.ruleForm = {...res.data}
+                        this.ruleForm.title = res.data.title
+                        this.ruleForm.content = res.data.content
+                        this.ruleForm.scenarioId = res.data.scenarioId
+                        this.imageUrl = `/common/download?name=${res.data.url}`
                     } else {
-                        this.$message.error(res.msg || '操作失败');
+                        this.$message.error(res.msg || '操作失败')
                     }
-
                 })
             },
+
+            outSelect(st, index) {
+                const _this = this
+                setTimeout(() => {
+                    const obj = JSON.parse(JSON.stringify(_this.dishFlavors[index]))
+                    obj.showOption = st
+                    _this.dishFlavors.splice(index, 1, obj)
+                }, 200)
+            },
+
+            inputHandle(val, index) {
+                // this.selectFlavor(false,index)
+            },
+
             submitForm(formName, st) {
-                this.goBack();
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        let params = {...this.ruleForm}
+                        params.title = this.ruleForm.title
+                        params.content = this.ruleForm.content
+                        params.url = this.ruleForm.url
+                        if (!this.imageUrl) {
+                            this.$message.error('请上传菜品图片')
+                            return
+                        }
+                        if (this.actionType == 'add') {
+                            delete params.id
+                            addDish(params).then(res => {
+                                if (res.code === 20000) {
+                                    this.$message.success('添加成功！')
+                                    if (!st) {
+                                        this.goBack()
+                                    } else {
+                                        this.dishFlavors = []
+                                        // this.dishFlavorsData = []
+                                        this.imageUrl = ''
+                                        this.ruleForm = {
+                                            'title': '',
+                                            'id': '',
+                                            'url': '',
+                                            'content': '',
+                                            'scenarioId': '',
+                                            'status': 0
+                                        }
+                                    }
+                                } else {
+                                    this.$message.error(res.msg || '操作失败')
+                                }
+                            }).catch(err => {
+                                this.$message.error('请求出错了：' + err)
+                            })
+                        } else {
+                            delete params.updateTime
+                            editDish(params).then(res => {
+                                if (res.code === 20000) {
+                                    this.$message.success('修改成功！')
+                                    this.goBack()
+                                } else {
+                                    this.$message.error(res.msg || '操作失败')
+                                }
+                            }).catch(err => {
+                                this.$message.error('请求出错了：' + err)
+                            })
+                        }
+                    } else {
+                        return false
+                    }
+                })
             },
-            goBack() {
-                window.parent.menuHandle({
-                    url: '/templates/backend/page/home/list.html',
-                }, false)
-            },
+
             handleAvatarSuccess(response, file, fileList) {
                 // 拼接down接口预览
                 if (response.code === 0 && response.msg === '未登录') {
                     window.top.location.href = '../login/login.html'
                 } else {
                     this.imageUrl = `/common/download?name=${response.data}`
-                    this.ruleForm.image = response.data
+                    this.ruleForm.url = response.data
                 }
             },
 
@@ -134,8 +320,13 @@
                     return file
                 }
             },
-        }
 
+            goBack() {
+                window.parent.menuHandle({
+                    url: '/templates/backend/page/home/list.html'
+                }, false)
+            }
+        }
     })
 </script>
 </body>
