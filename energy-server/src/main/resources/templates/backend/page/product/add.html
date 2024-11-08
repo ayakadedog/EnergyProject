@@ -118,6 +118,40 @@
                 </el-form-item>
             </div>
 
+            <div>
+                <el-form-item
+                        label="产品详情:"
+                        prop="region"
+                        class="uploadImg"
+                >
+                    <el-upload
+                            class="upload-demo"
+                            drag
+                            action="/common/upload"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess1"
+                            :on-change="onChange"
+                            ref="upload"
+                    >
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text">将图片拖到此处，或<em>点击上传</em></div>
+                        <div>
+                            <img
+                                    v-if="picture"
+                                    :src="picture"
+                                    class="avatar"
+                            />
+                            <i
+                                    v-else
+                                    class="el-icon-plus avatar-uploader-icon"
+                            ></i>
+                        </div>
+                    </el-upload>
+
+                </el-form-item>
+            </div>
+
+
             <div class="address">
                 <el-form-item
                         label="产品描述:"
@@ -184,12 +218,14 @@
                 vueRest: '1',
                 index: 0,
                 inputStyle: {'flex': 1},
+                picture: '',
                 ruleForm: {
                     'title': '',
                     'id': '',
                     'url': '',
                     'content': '',
                     'scenarioId': '',
+                    'picture': '',
                     'status': 0
                 },
                 mak: false
@@ -233,6 +269,7 @@
                         this.ruleForm.content = res.data.content
                         this.ruleForm.scenarioId = res.data.scenarioId
                         this.imageUrl = `/common/download?name=${res.data.url}`
+                        this.picture = `/common/download?name=${res.data.picture}`
                     } else {
                         this.$message.error(res.msg || '操作失败')
                     }
@@ -283,8 +320,9 @@
                         params.content = this.ruleForm.content
                         params.scenarioId = this.ruleForm.scenarioId
                         params.url = this.ruleForm.url
+                        params.picture = this.ruleForm.picture
                         if (!this.imageUrl) {
-                            this.$message.error('请上传菜品图片')
+                            this.$message.error('请上传图片')
                             return
                         }
                         if (this.actionType == 'add') {
@@ -341,7 +379,15 @@
                     this.ruleForm.url = response.data
                 }
             },
-
+            handleAvatarSuccess1(response, file, fileList) {
+                // 拼接down接口预览
+                if (response.code === 0 && response.msg === '未登录') {
+                    window.top.location.href = '../login/login.html'
+                } else {
+                    this.picture = `/common/download?name=${response.data}`
+                    this.ruleForm.picture = response.data
+                }
+            },
             onChange(file) {
                 if (file) {
                     const suffix = file.name.split('.')[1]

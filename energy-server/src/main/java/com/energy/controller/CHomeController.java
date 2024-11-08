@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.energy.constant.MessageConstant;
 import com.energy.dto.UserLoginDTO;
 import com.energy.entity.CHome;
+import com.energy.entity.CScenario;
 import com.energy.result.Result;
 import com.energy.service.CHomeService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -40,5 +42,10 @@ public class CHomeController {
     @GetMapping("/list")
     public Result<Page> homeList() {
         return Result.success(homeService.getHomeInfo(1,10));
+    }
+    @PutMapping
+    public Result<String> save(@RequestBody CHome home) {
+        homeService.updateById(home);
+        return Result.success(MessageConstant.ADD_SUC);
     }
 }
