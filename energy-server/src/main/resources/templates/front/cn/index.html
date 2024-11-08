@@ -14,6 +14,137 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 100vh; /* 或者根据你的设计要求调整高度 */
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%; /* 或者自定义高度，根据需要 */
+        }
+
+        .swiper-slide-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        /* 轮播图容器：占满整个屏幕 */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* 高度为屏幕高度 */
+            overflow: hidden;
+        }
+
+        /* 隐藏的 radio 按钮 */
+        .carousel-radio {
+            display: none;
+        }
+
+        /* 轮播图图片的容器 */
+        .carousel-slides {
+            display: flex;
+            transition: transform 1s ease; /* 动画过渡效果 */
+        }
+
+        /* 每张轮播图图片 */
+        .carousel-slide {
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        /* 轮播图背景图片 */
+        .slide-1 {
+            background-image: url('https://hoenergypower.cn/upfiles/202303458765629.jpg');
+        }
+
+        .slide-2 {
+            background-image: url('https://hoenergypower.cn/upfiles/202303458765629.jpg');
+        }
+
+        .slide-3 {
+            background-image: url('https://hoenergypower.cn/upfiles/202303458765629.jpg');
+        }
+
+        /* 前后按钮样式 */
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        /* 控制图片显示的样式 */
+        #slide1:checked ~ .carousel-slides {
+            transform: translateX(0%);
+        }
+
+        #slide2:checked ~ .carousel-slides {
+            transform: translateX(-100%);
+        }
+
+        #slide3:checked ~ .carousel-slides {
+            transform: translateX(-200%);
+        }
+
+        /* 小圆点样式 */
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 高亮显示当前的小圆点 */
+        #slide1:checked ~ .carousel-dots .dot1,
+        #slide2:checked ~ .carousel-dots .dot2,
+        #slide3:checked ~ .carousel-dots .dot3 {
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 <div class="preloader">
@@ -27,7 +158,7 @@
     <!-- Page Header-->
     <header class="section page-header">
         <!-- RD Navbar-->
-        <div class="rd-navbar-wrap">
+        <div class="rd-navbar-wrap" style="width: 100%">
             <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
                  data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed"
                  data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed"
@@ -331,107 +462,53 @@
         </div>
     </header>
 
-    <!-- Swiper-->
-    <section class="section swiper-container swiper-slider swiper-slider-classic" data-loop="true"
-             data-swiper='{"loop":true,"autoplay":{"delay":5000},"effect":"slide","simulateTouch":true,"direction":"horizontal","nav":false}'>
-        <div class="swiper-wrapper text-center">
-            <div class="swiper-slide" data-slide-bg="images/slider-1-slide-1-1770x742.jpg">
-                <div class="swiper-slide-caption section-md">
-                    <div class="container">
-                        <h1 data-caption-animate="fadeInLeft" data-caption-delay="0">宏正新能源</h1>
-                        <h4><p class="text-width-large" data-caption-animate="fadeInRight" data-caption-delay="100">
-                            为全人类绿色新能源事业做出新的突破和贡献</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" data-slide-bg="images/slider-1-slide-2-1770x742.jpg">
-                <div class="swiper-slide-caption section-md">
-                    <div class="container">
-                        <h1 data-caption-animate="fadeInLeft" data-caption-delay="0">宏正新能源</h1>
-                        <h4><p class="text-width-large" data-caption-animate="fadeInRight" data-caption-delay="100">
-                            致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide" data-slide-bg="images/slider-1-slide-3-1770x742.jpg">
-                <div class="swiper-slide-caption section-md">
-                    <div class="container">
-                        <h1 data-caption-animate="fadeInLeft" data-caption-delay="0">宏正新能源</h1>
-                        <h4><p class="text-width-large" data-caption-animate="fadeInRight" data-caption-delay="100">
-                            为全人类绿色新能源事业做出新的突破和贡献</p></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Swiper Pagination-->
-        <div class="swiper-pagination__module">
-            <div class="swiper-pagination__fraction">
-                <span class="swiper-pagination__fraction-index">00</span>
-                <span class="swiper-pagination__fraction-divider">/</span>
-                <span class="swiper-pagination__fraction-count">00</span>
-            </div>
-            <div class="swiper-pagination__divider"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
 
-    <!-- See all services-->
-    <!--    <section class="section section-sm section-first bg-default text-center">-->
-    <!--        <div class="container">-->
-    <!--            <div class="row row-30 justify-content-center">-->
-    <!--                <div class="col-md-7 col-lg-5 col-xl-6 text-lg-start wow fadeInUp"><img src="images/index-1-415x592.jpg"-->
-    <!--                                                                                        alt="" width="415"-->
-    <!--                                                                                        height="592"/>-->
-    <!--                </div>-->
-    <!--                <div class="col-lg-7 col-xl-6">-->
-    <!--                    <div class="row row-30">-->
-    <!--                        <div class="col-sm-6 wow fadeInRight">-->
-    <!--                            <article class="box-icon-modern box-icon-modern-custom">-->
-    <!--                                <div>-->
-    <!--                                    <h3 class="box-icon-modern-big-title">See all services</h3>-->
-    <!--                                    <div class="box-icon-modern-decor"></div>-->
-    <!--                                    <a class="button button-primary button-ujarak" href="services.html">All services</a>-->
-    <!--                                </div>-->
-    <!--                            </article>-->
-    <!--                        </div>-->
-    <!--                        <div class="col-sm-6 wow fadeInRight" data-wow-delay=".1s">-->
-    <!--                            <article class="box-icon-modern box-icon-modern-2">-->
-    <!--                                <div class="box-icon-modern-icon linearicons-phone-in-out"></div>-->
-    <!--                                <h5 class="box-icon-modern-title"><a href="single-service.html">CORPORATE SOLUTIONS</a>-->
-    <!--                                </h5>-->
-    <!--                                <div class="box-icon-modern-decor"></div>-->
-    <!--                                <p class="box-icon-modern-text">Need specific software for your company? We are ready to-->
-    <!--                                    develop it!</p>-->
-    <!--                            </article>-->
-    <!--                        </div>-->
-    <!--                        <div class="col-sm-6 wow fadeInRight" data-wow-delay=".2s">-->
-    <!--                            <article class="box-icon-modern box-icon-modern-2">-->
-    <!--                                <div class="box-icon-modern-icon linearicons-headset"></div>-->
-    <!--                                <h5 class="box-icon-modern-title"><a href="single-service.html">CALL CENTER-->
-    <!--                                    SOLUTIONS</a></h5>-->
-    <!--                                <div class="box-icon-modern-decor"></div>-->
-    <!--                                <p class="box-icon-modern-text">Our experts provide custom products of any complexity-->
-    <!--                                    for call centers.</p>-->
-    <!--                            </article>-->
-    <!--                        </div>-->
-    <!--                        <div class="col-sm-6 wow fadeInRight" data-wow-delay=".3s">-->
-    <!--                            <article class="box-icon-modern box-icon-modern-2">-->
-    <!--                                <div class="box-icon-modern-icon linearicons-outbox"></div>-->
-    <!--                                <h5 class="box-icon-modern-title"><a href="single-service.html">CLOUD DEVELOPMENT</a>-->
-    <!--                                </h5>-->
-    <!--                                <div class="box-icon-modern-decor"></div>-->
-    <!--                                <p class="box-icon-modern-text">We can also offer you reliable cloud development-->
-    <!--                                    solutions.</p>-->
-    <!--                            </article>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
+
+
+    <div class="carousel-container">
+        <!-- 隐藏的radio按钮 -->
+        <input type="radio" id="slide1" name="carousel" class="carousel-radio" checked>
+        <input type="radio" id="slide2" name="carousel" class="carousel-radio">
+        <input type="radio" id="slide3" name="carousel" class="carousel-radio">
+
+        <!-- 轮播图的图片 -->
+        <div class="carousel-slides">
+            <div class="carousel-slide slide-1"></div>
+            <div class="carousel-slide slide-2"></div>
+            <div class="carousel-slide slide-3"></div>
+        </div>
+
+        <!-- 前后按钮 -->
+        <label for="slide1" class="carousel-prev">&#10094;</label>
+        <label for="slide3" class="carousel-next">&#10095;</label>
+
+        <!-- 小圆点 -->
+        <div class="carousel-dots">
+            <label for="slide1" class="carousel-dot dot1"></label>
+            <label for="slide2" class="carousel-dot dot2"></label>
+            <label for="slide3" class="carousel-dot dot3"></label>
+        </div>
+    </div>
+
+
+    <!--    <section class="section swiper-container swiper-slider swiper-slider-classic" data-loop="true"-->
+    <!--             data-swiper='{"loop":true,"autoplay":{"delay":5000},"effect":"slide","simulateTouch":true,"direction":"horizontal","nav":false}'>-->
+    <!--        <div class="swiper-wrapper text-center" id="swiper-wrapper">-->
+    <!--            &lt;!&ndash; 动态生成的幻灯片 &ndash;&gt;-->
+    <!--        </div>-->
+    <!--        &lt;!&ndash; Swiper Pagination&ndash;&gt;-->
+    <!--        <div class="swiper-pagination__module">-->
+    <!--            <div class="swiper-pagination__fraction">-->
+    <!--                <span class="swiper-pagination__fraction-index">00</span>-->
+    <!--                <span class="swiper-pagination__fraction-divider">/</span>-->
+    <!--                <span class="swiper-pagination__fraction-count">00</span>-->
     <!--            </div>-->
+    <!--            <div class="swiper-pagination__divider"></div>-->
+    <!--            <div class="swiper-pagination"></div>-->
     <!--        </div>-->
     <!--    </section>-->
 
-    <!-- Latest Projects-->
+    <!-- 产品中心-->
     <section class="section section-sm section-fluid bg-default text-center">
         <div class="container-fluid isotope-wrap">
             <h2 class="wow fadeInLeft">产品中心</h2>
@@ -444,293 +521,50 @@
                         data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
                 </button>
                 <ul class="isotope-filters-list" id="isotope-3">
-                    <li><a class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery">全部产品</a>
+                    <li><a id="filter-all" class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery"
+                           data-type="all">全部产品</a></li>
+                    <li><a id="filter-type1" href="#" data-isotope-filter="1" data-isotope-group="gallery"
+                           data-type="1">家用储能</a></li>
+                    <li><a id="filter-type2" data-isotope-filter="2" data-isotope-group="gallery"
+                           data-type="2">工商业储能</a></li>
+                    <li><a id="filter-type3" data-isotope-filter="3" data-isotope-group="gallery"
+                           data-type="3">动力电池铅改锂</a></li>
+                    <li><a id="filter-type4" data-isotope-filter="4" data-isotope-group="gallery"
+                           data-type="4">新能源汽车充电桩</a></li>
+                    <li><a id="filter-type5" data-isotope-filter="5" data-isotope-group="gallery"
+                           data-type="5">光储充一体EPC</a>
                     </li>
-                    <li><a href="#" data-isotope-filter="Type 1" data-isotope-group="gallery">家用储能</a></li>
-                    <li><a href="#" data-isotope-filter="Type 2" data-isotope-group="gallery">工商业储能</a></li>
-                    <li><a href="#" data-isotope-filter="Type 3" data-isotope-group="gallery">动力电池铅改锂</a></li>
-                    <li><a href="#" data-isotope-filter="Type 4" data-isotope-group="gallery">新能源汽车充电桩</a></li>
-                    <li><a href="#" data-isotope-filter="Type 5" data-isotope-group="gallery">光储充一体EPC</a></li>
                 </ul>
             </div>
             <div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery"
-                 data-lightgallery="group">
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInLeft" data-filter="Type 1"
-                     data-wow-delay=".1s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure">
-                            <img src="http://www.huizhibattery.com/upload/image/2023/08/22/1006946683858.jpg" alt=""
-                                 width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1006946683858.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-2-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">机架式锂电池组</a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                机架式锂电池组机架式锂电池组机架式锂电池组机架式锂电池组机架式锂电池组</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 1"
-                     data-wow-delay=".1s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1001634440583.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1001634440583.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-6-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">壁挂式锂电池组
-                                </a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">壁挂式锂电池组 壁挂式锂电池组 壁挂式锂电池组 壁挂式锂电池组
-                                壁挂式锂电池组 壁挂式锂电池组
-                            </p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 2"
-                     data-wow-delay=".2s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1008194155690.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1008194155690.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-7-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">堆叠式锂电池组</a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInLeft" data-filter="Type 3">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007251533952.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007251533952.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-1-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">工商业式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                工商业式储能系统工商业式储能系统工商业式储能系统工商业式储能系统工商业式储能系统</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 4">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-5-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">集装箱式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 5">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-5-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="project-info.html">集装箱式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--应用场景-->
-    <section class="section section-sm section-fluid bg-default text-center">
-        <div class="container-fluid isotope-wrap">
-            <h2 class="wow fadeInLeft">应用场景</h2>
-            <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">
-                致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p>
-            </h4>
-            <div class="isotope-filters isotope-filters-horizontal">
-                <button class="isotope-filters-toggle button button-md button-icon button-icon-right button-default-outline button-wapasha"
-                        data-custom-toggle="#isotope-3" data-custom-toggle-hide-on-blur="true"
-                        data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
-                </button>
-                <ul class="isotope-filters-list" id="isotope-3">
-                    <li><a class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery">全部产品</a>
-                    </li>
-                    <li><a href="#" data-isotope-filter="Type 1" data-isotope-group="gallery">家用储能</a></li>
-                    <li><a href="#" data-isotope-filter="Type 2" data-isotope-group="gallery">工商业储能</a></li>
-                    <li><a href="#" data-isotope-filter="Type 3" data-isotope-group="gallery">动力电池铅改锂</a></li>
-                    <li><a href="#" data-isotope-filter="Type 4" data-isotope-group="gallery">新能源汽车充电桩</a></li>
-                    <li><a href="#" data-isotope-filter="Type 5" data-isotope-group="gallery">光储充一体EPC</a></li>
-                </ul>
-            </div>
-            <div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery"
-                 data-lightgallery="group">
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInLeft" data-filter="Type 1"
-                     data-wow-delay=".1s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure">
-                            <img src="http://www.huizhibattery.com/upload/image/2023/08/22/1006946683858.jpg" alt=""
-                                 width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1006946683858.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-2-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">机架式锂电池组</a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                机架式锂电池组机架式锂电池组机架式锂电池组机架式锂电池组机架式锂电池组</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 1"
-                     data-wow-delay=".1s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1001634440583.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1001634440583.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-6-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">壁挂式锂电池组
-                                </a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">壁挂式锂电池组 壁挂式锂电池组 壁挂式锂电池组 壁挂式锂电池组
-                                壁挂式锂电池组 壁挂式锂电池组
-                            </p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 2"
-                     data-wow-delay=".2s">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1008194155690.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1008194155690.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-7-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">堆叠式锂电池组</a></h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组堆叠式锂电池组</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInLeft" data-filter="Type 3">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007251533952.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007251533952.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-1-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">工商业式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                工商业式储能系统工商业式储能系统工商业式储能系统工商业式储能系统工商业式储能系统</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 4">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-5-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">集装箱式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3 isotope-item wow fadeInRight" data-filter="Type 5">
-                    <!-- Thumbnail Classic-->
-                    <article class="thumbnail thumbnail-classic thumbnail-md">
-                        <div class="thumbnail-classic-figure"><img
-                                src="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg" alt=""
-                                width="420" height="350"/>
-                        </div>
-                        <div class="thumbnail-classic-caption">
-                            <div class="thumbnail-classic-title-wrap"><a class="icon fl-bigmug-line-zoom60"
-                                                                         href="http://www.huizhibattery.com/upload/image/2023/08/22/1007722691274.jpg"
-                                                                         data-lightgallery="item"><img
-                                    src="images/fullwidth-gallery-5-420x350.jpg" alt="" width="420" height="350"/></a>
-                                <h5 class="thumbnail-classic-title"><a href="scenario-info.html">集装箱式储能系统</a>
-                                </h5>
-                            </div>
-                            <p class="thumbnail-classic-text">
-                                集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统集装箱式储能系统</p>
-                        </div>
-                    </article>
-                </div>
+                 data-lightgallery="group" id="product-list">
             </div>
         </div>
     </section>
 
-    <!-- Years of experience-->
+
+    <!-- 应用场景-->
+    <div>
+        <section class="section section-sm section-fluid bg-default text-center">
+            <div class="container-fluid isotope-wrap">
+                <h2 class="wow fadeInLeft">应用场景</h2>
+                <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">
+                    致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p>
+                </h4>
+                <div class="isotope-filters isotope-filters-horizontal">
+                    <button class="isotope-filters-toggle button button-md button-icon button-icon-right button-default-outline button-wapasha"
+                            data-custom-toggle="#isotope-4" data-custom-toggle-hide-on-blur="true"
+                            data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
+                    </button>
+                </div>
+                <div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery"
+                     data-lightgallery="group" id="product-liste">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!--关于我们-->
     <section class="section section-sm bg-default">
         <div class="container">
             <div class="row row-30 row-xl-24 justify-content-center align-items-center align-items-lg-start text-start">
@@ -760,7 +594,7 @@
                         <div class="col-9 col-sm-6">
                             <div class="counter-amy">
                                 <div class="counter-amy-number">
-                                    <span class="counter">500㎡</span>
+                                    <span class="counter">500</span>
                                 </div>
                                 <span class="symbol">㎡</span>
                                 <h6 class="counter-amy-title">厂房面积</h6>
@@ -777,7 +611,7 @@
                         <div class="col-9 col-sm-6">
                             <div class="counter-amy">
                                 <div class="counter-amy-number">
-                                    <span class="counter">200万</span>
+                                    <span class="counter">200</span>
                                 </div>
                                 <span class="symbol">万</span>
                                 <h6 class="counter-amy-title">注册资本</h6>
@@ -789,249 +623,7 @@
         </div>
     </section>
 
-    <!-- Years of experience-->
-    <!--    <section class="section section-sm section-fluid bg-default">-->
-    <!--        <div class="container-fluid">-->
-    <!--            <h2>Meet The Team</h2>-->
-    <!--            <div class="row row-sm row-30 justify-content-center">-->
-    <!--                <div class="col-md-6 col-lg-5 col-xl-3 wow fadeInRight">-->
-    <!--                    &lt;!&ndash; Team Classic&ndash;&gt;-->
-    <!--                    <article class="team-classic team-classic-lg"><a class="team-classic-figure" href="#"><img-->
-    <!--                            src="images/team-11-420x424.jpg" alt="" width="420" height="424"/></a>-->
-    <!--                        <div class="team-classic-caption">-->
-    <!--                            <h4 class="team-classic-name"><a href="#">Ryan Wilson</a></h4>-->
-    <!--                            <p class="team-classic-status">Director of Production</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay=".1s">-->
-    <!--                    &lt;!&ndash; Team Classic&ndash;&gt;-->
-    <!--                    <article class="team-classic team-classic-lg"><a class="team-classic-figure" href="#"><img-->
-    <!--                            src="images/team-12-420x424.jpg" alt="" width="420" height="424"/></a>-->
-    <!--                        <div class="team-classic-caption">-->
-    <!--                            <h4 class="team-classic-name"><a href="#">Jill Peterson</a></h4>-->
-    <!--                            <p class="team-classic-status">UI Designer</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay=".2s">-->
-    <!--                    &lt;!&ndash; Team Classic&ndash;&gt;-->
-    <!--                    <article class="team-classic team-classic-lg"><a class="team-classic-figure" href="#"><img-->
-    <!--                            src="images/team-13-420x424.jpg" alt="" width="420" height="424"/></a>-->
-    <!--                        <div class="team-classic-caption">-->
-    <!--                            <h4 class="team-classic-name"><a href="#">Sam Robinson</a></h4>-->
-    <!--                            <p class="team-classic-status">Senior Developer</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay=".3s">-->
-    <!--                    &lt;!&ndash; Team Classic&ndash;&gt;-->
-    <!--                    <article class="team-classic team-classic-lg"><a class="team-classic-figure" href="#"><img-->
-    <!--                            src="images/team-14-420x424.jpg" alt="" width="420" height="424"/></a>-->
-    <!--                        <div class="team-classic-caption">-->
-    <!--                            <h4 class="team-classic-name"><a href="#">Mary Lee</a></h4>-->
-    <!--                            <p class="team-classic-status">Software Developer</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
-    <!-- You dream — we embody-->
-    <!--    <section class="section section-sm bg-default text-md-start">-->
-    <!--        <div class="container">-->
-    <!--            <div class="row row-50 align-items-center justify-content-center justify-content-xl-between">-->
-    <!--                <div class="col-lg-6 col-xl-5 wow fadeInLeft">-->
-    <!--                    <h2>Get More With Us</h2>-->
-    <!--                    &lt;!&ndash; Bootstrap tabs&ndash;&gt;-->
-    <!--                    <div class="tabs-custom tabs-horizontal tabs-line tabs-line-big text-center text-md-start"-->
-    <!--                         id="tabs-6">-->
-    <!--                        &lt;!&ndash; Nav tabs&ndash;&gt;-->
-    <!--                        <ul class="nav nav-tabs">-->
-    <!--                            <li class="item" role="presentation"><a class="nav-link nav-link-big active"-->
-    <!--                                                                    href="#tabs-6-1" data-bs-toggle="tab">01</a></li>-->
-    <!--                            <li class="item" role="presentation"><a class="nav-link nav-link-big" href="#tabs-6-2"-->
-    <!--                                                                    data-bs-toggle="tab">02</a></li>-->
-    <!--                            <li class="item" role="presentation"><a class="nav-link nav-link-big" href="#tabs-6-3"-->
-    <!--                                                                    data-bs-toggle="tab">03</a></li>-->
-    <!--                            <li class="item" role="presentation"><a class="nav-link nav-link-big" href="#tabs-6-4"-->
-    <!--                                                                    data-bs-toggle="tab">04</a></li>-->
-    <!--                        </ul>-->
-    <!--                        &lt;!&ndash; Tab panes&ndash;&gt;-->
-    <!--                        <div class="tab-content">-->
-    <!--                            <div class="tab-pane fade show active" id="tabs-6-1">-->
-    <!--                                <h5 class="fw-normal">FREE APPS</h5>-->
-    <!--                                <p>We regularly upload new free apps to our website, which is fully accessible to our-->
-    <!--                                    clients and subscribers. You can also find out about free apps in our blog.</p>-->
-    <!--                                <div class="group-sm group-middle"><a class="button button-secondary button-pipaluk"-->
-    <!--                                                                      href="#" target="_blank">Get in touch</a><a-->
-    <!--                                        class="button button-default-outline button-wapasha" href="#">Download-->
-    <!--                                    presentation</a></div>-->
-    <!--                            </div>-->
-    <!--                            <div class="tab-pane fade" id="tabs-6-2">-->
-    <!--                                <h5 class="fw-normal">GET SOCIAL</h5>-->
-    <!--                                <p>Every app we develop has built-in social support that allows you to stay connected to-->
-    <!--                                    your accounts on Facebook, Instagram, Twitter and other networks.</p>-->
-    <!--                                <div class="group-sm group-middle"><a class="button button-secondary button-pipaluk"-->
-    <!--                                                                      href="#" target="_blank">Get in touch</a><a-->
-    <!--                                        class="button button-default-outline button-wapasha" href="#">Download-->
-    <!--                                    presentation</a></div>-->
-    <!--                            </div>-->
-    <!--                            <div class="tab-pane fade" id="tabs-6-3">-->
-    <!--                                <h5 class="fw-normal">CUSTOMER SERVICE</h5>-->
-    <!--                                <p>Every customer of DreamSoft can get access to our friendly and qualified 24/7 support-->
-    <!--                                    via chat or phone. Feel free to ask us any questions!</p>-->
-    <!--                                <div class="group-sm group-middle"><a class="button button-secondary button-pipaluk"-->
-    <!--                                                                      href="#" target="_blank">Get in touch</a><a-->
-    <!--                                        class="button button-default-outline button-wapasha" href="#">Download-->
-    <!--                                    presentation</a></div>-->
-    <!--                            </div>-->
-    <!--                            <div class="tab-pane fade" id="tabs-6-4">-->
-    <!--                                <h5 class="fw-normal">GREAT USABILITY</h5>-->
-    <!--                                <p>All our apps are designed to have great usability in order to easily operate our-->
-    <!--                                    applications. That is why our software has high ratings and lots of awards.</p>-->
-    <!--                                <div class="group-sm group-middle"><a class="button button-secondary button-pipaluk"-->
-    <!--                                                                      href="#" target="_blank">Get in touch</a><a-->
-    <!--                                        class="button button-default-outline button-wapasha" href="#">Download-->
-    <!--                                    presentation</a></div>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay=".1s">-->
-    <!--                    <div class="row row-30 align-items-center justify-content-center justify-content-xl-between">-->
-    <!--                        <div class="col-sm-6"><img src="images/index-4-261x484.png" alt="" width="261" height="484"/>-->
-    <!--                        </div>-->
-    <!--                        <div class="col-sm-6"><img src="images/index-5-261x484.png" alt="" width="261" height="484"/>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
-    <!-- What people Say-->
-    <!--    <section class="section section-sm section-bottom-70 section-fluid bg-default">-->
-    <!--        <div class="container-fluid">-->
-    <!--            <h2>What people Say</h2>-->
-    <!--            <div class="row row-50 row-sm">-->
-    <!--                <div class="col-md-6 col-xl-4 wow fadeInRight">-->
-    <!--                    &lt;!&ndash; Quote Modern&ndash;&gt;-->
-    <!--                    <article class="quote-modern quote-modern-custom">-->
-    <!--                        <div class="unit unit-spacing-md align-items-center">-->
-    <!--                            <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles"-->
-    <!--                                                                                                src="images/user-11-75x75.jpg"-->
-    <!--                                                                                                alt="" width="75"-->
-    <!--                                                                                                height="75"/></a></div>-->
-    <!--                            <div class="unit-body">-->
-    <!--                                <h4 class="quote-modern-cite"><a href="#">Catherine Williams</a></h4>-->
-    <!--                                <p class="quote-modern-status">Regular client</p>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="quote-modern-text">-->
-    <!--                            <p class="q">DreamSoft offers a high caliber of resources skilled in Microsoft Azure .NET,-->
-    <!--                                mobile and Quality Assurance. They became our true business partners over the past three-->
-    <!--                                years.</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 col-xl-4 wow fadeInRight" data-wow-delay=".1s">-->
-    <!--                    &lt;!&ndash; Quote Modern&ndash;&gt;-->
-    <!--                    <article class="quote-modern quote-modern-custom">-->
-    <!--                        <div class="unit unit-spacing-md align-items-center">-->
-    <!--                            <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles"-->
-    <!--                                                                                                src="images/user-12-75x75.jpg"-->
-    <!--                                                                                                alt="" width="75"-->
-    <!--                                                                                                height="75"/></a></div>-->
-    <!--                            <div class="unit-body">-->
-    <!--                                <h4 class="quote-modern-cite"><a href="#">Rupert Wood</a></h4>-->
-    <!--                                <p class="quote-modern-status">Regular client</p>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="quote-modern-text">-->
-    <!--                            <p class="q">DreamSoft powered us with a competent team to develop products for banking-->
-    <!--                                services. The team has been delivering results within budget and time, which is-->
-    <!--                                amazing.</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-md-6 col-xl-4 wow fadeInRight" data-wow-delay=".2s">-->
-    <!--                    &lt;!&ndash; Quote Modern&ndash;&gt;-->
-    <!--                    <article class="quote-modern quote-modern-custom">-->
-    <!--                        <div class="unit unit-spacing-md align-items-center">-->
-    <!--                            <div class="unit-left"><a class="quote-modern-figure" href="#"><img class="img-circles"-->
-    <!--                                                                                                src="images/user-20-75x75.jpg"-->
-    <!--                                                                                                alt="" width="75"-->
-    <!--                                                                                                height="75"/></a></div>-->
-    <!--                            <div class="unit-body">-->
-    <!--                                <h4 class="quote-modern-cite"><a href="#">Samantha Brown</a></h4>-->
-    <!--                                <p class="quote-modern-status">Regular client</p>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="quote-modern-text">-->
-    <!--                            <p class="q">DreamSoft is a highly skilled and uniquely capable firm with multitudes of-->
-    <!--                                talent on-board. We have collaborated on a number of diverse projects that have been a-->
-    <!--                                great success.</p>-->
-    <!--                        </div>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
-    <!-- Latest blog posts-->
-    <!--    <section class="section section-sm section-last bg-default">-->
-    <!--        <div class="container">-->
-    <!--            <h2>Latest blog posts</h2>-->
-    <!--            <div class="row row-60 row-sm">-->
-    <!--                <div class="col-sm-6 col-lg-4 wow fadeInLeft">-->
-    <!--                    &lt;!&ndash; Post Modern&ndash;&gt;-->
-    <!--                    <article class="post post-modern"><a class="post-modern-figure" href="blog-post.html"><img-->
-    <!--                            src="images/post-10-370x307.jpg" alt="" width="370" height="307"/>-->
-    <!--                        <div class="post-modern-time">-->
-    <!--                            <time datetime="2019-07-04"><span class="post-modern-time-month">07</span><span-->
-    <!--                                    class="post-modern-time-number">04</span></time>-->
-    <!--                        </div>-->
-    <!--                    </a>-->
-    <!--                        <h4 class="post-modern-title"><a href="blog-post.html">Benefits Of Async/Await</a></h4>-->
-    <!--                        <p class="post-modern-text">Asynchronous functions are a good and bad thing in JavaScript. The-->
-    <!--                            good side is that asynchronous functions are non-blocking and…</p>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-sm-6 col-lg-4 wow fadeInLeft" data-wow-delay=".1s">-->
-    <!--                    &lt;!&ndash; Post Modern&ndash;&gt;-->
-    <!--                    <article class="post post-modern"><a class="post-modern-figure" href="blog-post.html"><img-->
-    <!--                            src="images/post-11-370x307.jpg" alt="" width="370" height="307"/>-->
-    <!--                        <div class="post-modern-time">-->
-    <!--                            <time datetime="2019-07-17"><span class="post-modern-time-month">07</span><span-->
-    <!--                                    class="post-modern-time-number">17</span></time>-->
-    <!--                        </div>-->
-    <!--                    </a>-->
-    <!--                        <h4 class="post-modern-title"><a href="blog-post.html">Key Considerations Of iPaaS</a></h4>-->
-    <!--                        <p class="post-modern-text">Digital transformation requires cloud appropriate adoption, legacy-->
-    <!--                            IT systems modernization, and Agile-based methodologies for faster…</p>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--                <div class="col-sm-6 col-lg-4 wow fadeInLeft" data-wow-delay=".2s">-->
-    <!--                    &lt;!&ndash; Post Modern&ndash;&gt;-->
-    <!--                    <article class="post post-modern"><a class="post-modern-figure" href="blog-post.html"><img-->
-    <!--                            src="images/post-12-370x307.jpg" alt="" width="370" height="307"/>-->
-    <!--                        <div class="post-modern-time">-->
-    <!--                            <time datetime="2019-07-22"><span class="post-modern-time-month">07</span><span-->
-    <!--                                    class="post-modern-time-number">22</span></time>-->
-    <!--                        </div>-->
-    <!--                    </a>-->
-    <!--                        <h4 class="post-modern-title"><a href="blog-post.html">Hibernate Query Language</a></h4>-->
-    <!--                        <p class="post-modern-text">In this tutorial, we will discuss the Hibernate Query Language. HQL-->
-    <!--                            is an object-oriented query language. Hibernate Query...</p>-->
-    <!--                    </article>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
-    <!-- Page Footer-->
+    <!-- 页脚-->
     <footer class="section section-fluid footer-classic">
         <div class="container-fluid bg-gray-15">
             <div class="row justify-content-center row-30">
@@ -1133,5 +725,204 @@
 <!-- Javascript-->
 <script src="js/core.min.js"></script>
 <script src="js/script.js"></script>
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="../../backend/js/request.js"></script>
+<script>
+    // 获取后端接口中的数据
+    axios.get('/cn/home/list')
+        .then(function (response) {
+            const slides = response.data.data.records;
+            const swiperWrapper = document.getElementById('swiper-wrapper');
+            swiperWrapper.innerHTML = '';
+
+            // 遍历数据，创建 swiper-slide
+            slides.forEach(slide => {
+                const slideDiv = document.createElement('div');
+                slideDiv.classList.add('swiper-slide');
+                // const imgUrl = "../../picture" + slide.url;
+                const imgUrl = `/common/download?name=${slide.url}`;
+                slideDiv.style.backgroundImage = `url(${imgUrl})`;
+                slideDiv.setAttribute('data-slide-bg', imgUrl);
+                slideDiv.innerHTML = `
+              <div class="swiper-slide-caption section-md" data-slide-bg="${imgUrl}">
+                <div class="container">
+                <a href="project-info.html?id=${slide.id}">
+                  <h1 data-caption-animate="fadeInLeft" data-caption-delay="0">${slide.title}</h1>
+                </a>
+                  <h4>
+                    <p class="text-width-large" data-caption-animate="fadeInRight" data-caption-delay="100">${slide.content}</p>
+                  </h4>
+                </div>
+              </div>
+            `;
+                swiperWrapper.appendChild(slideDiv);
+            });
+
+            // 初始化 Swiper
+            new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        })
+        .catch(function (error) {
+            console.error('请求失败:', error);
+        });
+
+    // 初始加载所有产品
+    fetchProductsByType(null); // 默认加载所有产品
+    fetchScenarioByType(null); // 默认加载所有产品
+
+    // 获取每个筛选按钮
+    const filterAll = document.getElementById('filter-all');
+    const filterType1 = document.getElementById('filter-type1');
+    const filterType2 = document.getElementById('filter-type2');
+    const filterType3 = document.getElementById('filter-type3');
+    const filterType4 = document.getElementById('filter-type4');
+    const filterType5 = document.getElementById('filter-type5');
+
+    // 给每个筛选按钮绑定事件
+    filterAll.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType(null);
+    });
+    filterType1.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType('1');
+    });
+    filterType2.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType('2');
+    });
+    filterType3.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType('3');
+    });
+    filterType4.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType('4');
+    });
+    filterType5.addEventListener('click', function (event) {
+        event.preventDefault();
+        fetchProductsByType('5');
+    });
+
+
+    // 发送请求并渲染产品数据
+    function fetchProductsByType(type) {
+        axios.get('/cn/product/type', {
+            params: {
+                type: type // 传递产品类型参数
+            }
+        })
+            .then(response => {
+                const data = response.data.data;
+                console.error(data)
+                // 获取产品列表容器并清空现有内容
+                const productList = document.getElementById('product-list');
+                productList.innerHTML = '';
+
+                // 渲染产品项
+                data.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.classList.add('col-sm-6', 'col-lg-4', 'col-xxl-3', 'isotope-item', 'wow', 'fadeInLeft');
+                    productElement.setAttribute('data-filter', product.id);
+                    productElement.setAttribute('data-wow-delay', '.1s');
+                    // const imgUrl = "../../picture" + product.url;
+                    const imgUrl = `/common/download?name=${product.url}`;
+                    productElement.innerHTML = `
+                <article class="thumbnail thumbnail-classic thumbnail-md">
+                    <div class="thumbnail-classic-figure">
+                        <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                    </div>
+                    <div class="thumbnail-classic-caption">
+                        <div class="thumbnail-classic-title-wrap">
+                            <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
+                                <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                            </a>
+                            <h5 class="thumbnail-classic-title"><a href="project-info.html?id=${product.id}">${product.title}</a></h5>
+                        </div>
+                        <p class="thumbnail-classic-text">${product.content}</p>
+                    </div>
+                </article>
+            `;
+                    productList.appendChild(productElement);
+                });
+
+                // 触发 Isotope 更新
+                setTimeout(() => {
+                    const isotope = new Isotope('.isotope', {
+                        itemSelector: '.isotope-item',
+                        layoutMode: 'fitRows',
+                        filter: '*'
+                    });
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+            });
+    }
+
+
+    // 发送请求并渲染数据
+    function fetchScenarioByType(type) {
+        axios.get('/cn/scenario/type', {
+            params: {
+                type: type // 传递产品类型参数
+            }
+        })
+            .then(response => {
+                const data = response.data.data;
+                // 获取产品列表容器并清空现有内容
+                const productList = document.getElementById('product-liste');
+                productList.innerHTML = '';
+
+                // 渲染产品项
+                data.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.classList.add('col-sm-6', 'col-lg-4', 'col-xxl-3', 'isotope-item', 'wow', 'fadeInLeft');
+                    productElement.setAttribute('data-filter', product.id);
+                    productElement.setAttribute('data-wow-delay', '.1s');
+                    // const imgUrl = "../../picture" + product.url;
+                    const imgUrl = `/common/download?name=${product.url}`;
+                    productElement.innerHTML = `
+                <article class="thumbnail thumbnail-classic thumbnail-md">
+                    <div class="thumbnail-classic-figure">
+                        <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                    </div>
+                    <div class="thumbnail-classic-caption">
+                        <div class="thumbnail-classic-title-wrap">
+                            <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
+                                <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                            </a>
+                            <h5 class="thumbnail-classic-title"><a href="project-info.html">${product.title}</a></h5>
+                        </div>
+                        <p class="thumbnail-classic-text">${product.content}</p>
+                    </div>
+                </article>
+            `;
+                    productList.appendChild(productElement);
+                });
+
+                // 触发 Isotope 更新
+                setTimeout(() => {
+                    const isotope = new Isotope('.isotope', {
+                        itemSelector: '.isotope-item',
+                        layoutMode: 'fitRows',
+                        filter: '*'
+                    });
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+            });
+    }
+</script>
+
 </body>
 </html>
