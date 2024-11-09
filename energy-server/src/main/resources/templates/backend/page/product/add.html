@@ -72,17 +72,23 @@
                             maxlength="20"
                     />
                 </el-form-item>
-                <el-form-item
-                        label="使用场景:"
-                        prop="scenarioId"
-                >
-                    <el-select
-                            v-model="ruleForm.scenarioId"
-                            placeholder="请选择使用场景"
-                    >
-                        <el-option v-for="(item,index) in scenario" :key="index" :label="item.title" :value="item.id"/>
-                    </el-select>
-                </el-form-item>
+                <!--                <el-form-item-->
+                <!--                        label="使用场景:"-->
+                <!--                        prop="scenarioId"-->
+                <!--                >-->
+                <!--                    <el-select-->
+                <!--                            v-model="ruleForm.scenarioId"-->
+                <!--                            placeholder="请选择使用场景"-->
+                <!--                    >-->
+                <!--                        <el-option v-for="(item,index) in scenario" :key="index" :label="item.title" :value="item.id"/>-->
+                <!--                    </el-select>-->
+                <!--                </el-form-item>-->
+
+                <el-select v-model="scenarioId" multiple placeholder="请选择使用场景">
+                    <el-option v-for="(item,index) in scenario" :key="index" :label="item.title" :value="item.id"/>
+                </el-select>
+
+
             </div>
 
             <div>
@@ -219,12 +225,13 @@
                 index: 0,
                 inputStyle: {'flex': 1},
                 picture: '',
+                scenarioId: [],
                 ruleForm: {
                     'title': '',
                     'id': '',
                     'url': '',
                     'content': '',
-                    'scenarioId': '',
+                    'scenarioId': [],
                     'picture': '',
                     'status': 0
                 },
@@ -270,6 +277,7 @@
                         this.ruleForm.scenarioId = res.data.scenarioId
                         this.imageUrl = `/common/download?name=${res.data.url}`
                         this.picture = `/common/download?name=${res.data.picture}`
+                        this.scenarioId = res.data.scenario.split(',').map(item => item.trim());
                     } else {
                         this.$message.error(res.msg || '操作失败')
                     }
@@ -314,6 +322,9 @@
             submitForm(formName, st) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        console.error("123123123123123123123123123123")
+                        console.error(this.scenarioId)
+
                         let params = {...this.ruleForm}
                         // params.flavors = this.dishFlavors
                         params.title = this.ruleForm.title
@@ -321,6 +332,18 @@
                         params.scenarioId = this.ruleForm.scenarioId
                         params.url = this.ruleForm.url
                         params.picture = this.ruleForm.picture
+                        params.scenarioId = '';
+                        console.error(this.scenario)
+                        for (let i = 0; i < this.scenarioId.length; i++) {
+                            console.error(this.scenarioId[i])
+                            params.scenarioId += this.scenarioId[i];
+                            if (i < this.scenario.length - 1) {
+                                params.scenarioId += ',';  // 在元素之间添加逗号
+                            }
+                        }
+
+                        // params.scenarioId = this.scenarioId.map(scenario => scenario.title).join(',');
+
                         if (!this.imageUrl) {
                             this.$message.error('请上传图片')
                             return

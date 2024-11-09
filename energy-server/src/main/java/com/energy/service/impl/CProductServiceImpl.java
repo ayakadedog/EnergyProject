@@ -12,6 +12,8 @@ import com.energy.service.CScenarioService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -63,6 +65,13 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
         LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(type != null, CProduct::getScenarioId, type);
         return this.list(queryWrapper);
+    }
+
+    @Override
+    public CProduct getDifferById(Long id) {
+        CProduct product = this.getById(id);
+        product.setScenario(product.getScenarioId());
+        return product;
     }
 
 

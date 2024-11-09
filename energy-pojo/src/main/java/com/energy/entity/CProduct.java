@@ -17,7 +17,7 @@ import lombok.Data;
 public class CProduct implements Serializable {
     private Long id;
 
-    private Long scenarioId;
+    private String scenarioId;
 
     private String url;
 

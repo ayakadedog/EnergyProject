@@ -51,7 +51,7 @@ public class CProductController {
     @GetMapping("/{id}")
     public Result<CProduct> get(@PathVariable Long id){
 
-        CProduct product = productService.getById(id);
+        CProduct product = productService.getDifferById(id);
 
         return Result.success(product);
     }

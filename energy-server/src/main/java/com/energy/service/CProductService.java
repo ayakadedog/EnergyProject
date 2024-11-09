@@ -18,4 +18,6 @@ public interface CProductService extends IService<CProduct> {
     Page<CProduct> getPage(Integer page, Integer pageSize, String name);
 
     List<CProduct> orderByType(String type);
+
+    CProduct getDifferById(Long id);
 }
