@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +24,12 @@ import java.util.List;
 public class CProductController {
     @Resource
     private CProductService productService;
-    
-    
+
+
     @PostMapping
     public Result<String> save(@RequestBody CProduct product) {
         product.setCreateTime(LocalDateTime.now());
-        productService.saveByListId(product);
+        productService.save(product);
         return Result.success(MessageConstant.ADD_SUC);
     }
 
@@ -59,7 +60,7 @@ public class CProductController {
 
     @PutMapping
     public Result<String> update(@RequestBody CProduct product){
-        productService.updateByListId(product);
+        productService.updateById(product);
 
         return Result.success(MessageConstant.EDIT_SUCCESS);
     }
@@ -91,5 +92,11 @@ public class CProductController {
         List<CProduct> list = productService.orderByType(type);
 
         return Result.success(list);
+    }
+
+    @GetMapping("/list/name")
+    public Result<List<CProduct>> list() {
+        LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
+        return Result.success(productService.list(queryWrapper));
     }
 }

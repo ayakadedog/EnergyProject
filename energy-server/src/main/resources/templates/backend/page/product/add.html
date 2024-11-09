@@ -126,32 +126,20 @@
 
             <div>
                 <el-form-item
-                        label="产品详情:"
+                        label="产品信息:"
                         prop="region"
                         class="uploadImg"
                 >
+
                     <el-upload
                             class="upload-demo"
-                            drag
                             action="/common/upload"
-                            :show-file-list="false"
+                            multiple
+                            :limit="1"
                             :on-success="handleAvatarSuccess1"
                             :on-change="onChange"
-                            ref="upload"
-                    >
-                        <i class="el-icon-upload"></i>
-                        <div class="el-upload__text">将图片拖到此处，或<em>点击上传</em></div>
-                        <div>
-                            <img
-                                    v-if="picture"
-                                    :src="picture"
-                                    style="display: block; width: 100%; height: auto; object-fit: contain;"
-                            />
-                            <i
-                                    v-else
-                                    class="el-icon-plus avatar-uploader-icon"
-                            ></i>
-                        </div>
+                            :file-list="fileList">
+                        <el-button size="small" type="primary">点击上传</el-button>
                     </el-upload>
 
                 </el-form-item>
@@ -226,6 +214,7 @@
                 inputStyle: {'flex': 1},
                 picture: '',
                 scenarioId: [],
+                fileList: [],
                 ruleForm: {
                     'title': '',
                     'id': '',
@@ -322,9 +311,6 @@
             submitForm(formName, st) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        console.error("123123123123123123123123123123")
-                        console.error(this.scenarioId)
-
                         let params = {...this.ruleForm}
                         // params.flavors = this.dishFlavors
                         params.title = this.ruleForm.title
@@ -333,7 +319,6 @@
                         params.url = this.ruleForm.url
                         params.picture = this.ruleForm.picture
                         params.scenarioId = '';
-                        console.error(this.scenario)
                         for (let i = 0; i < this.scenarioId.length; i++) {
                             console.error(this.scenarioId[i])
                             params.scenarioId += this.scenarioId[i];
@@ -415,11 +400,11 @@
                 if (file) {
                     const suffix = file.name.split('.')[1]
                     const size = file.size / 1024 / 1024 < 2
-                    if (['png', 'jpeg', 'jpg'].indexOf(suffix) < 0) {
-                        this.$message.error('上传图片只支持 png、jpeg、jpg 格式！')
-                        this.$refs.upload.clearFiles()
-                        return false
-                    }
+                    // if (['png', 'jpeg', 'jpg'].indexOf(suffix) < 0) {
+                    //     this.$message.error('上传图片只支持 png、jpeg、jpg 格式！')
+                    //     this.$refs.upload.clearFiles()
+                    //     return false
+                    // }
                     if (!size) {
                         this.$message.error('上传文件大小不能超过 2MB!')
                         return false

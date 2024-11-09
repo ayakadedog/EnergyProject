@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
 <head>
-    <title>About Us</title>
+    <title>Grid gallery</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -14,6 +14,30 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 样式定义 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            padding: 8px;
+            text-align: center;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+
 </head>
 <body>
 <div class="preloader">
@@ -83,10 +107,9 @@
                                 </div>
                                 <!-- RD Navbar Nav-->
                                 <ul class="rd-navbar-nav">
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">首页</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">主页</a>
                                     </li>
-                                    <li class="rd-nav-item"><a class="rd-nav-link"
-                                                               href="about-us.html">关于我们</a>
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">关于我们</a>
                                     </li>
                                     <li class="rd-nav-item active"><a class="rd-nav-link"
                                                                       href="grid-gallery.html">产品中心</a>
@@ -130,8 +153,6 @@
                                     </li>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="classic-blog.html">服务支持</a>
                                     </li>
-
-
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">联系我们</a>
                                     </li>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="#">Pages</a>
@@ -338,84 +359,321 @@
     <section class="breadcrumbs-custom-inset">
         <div class="breadcrumbs-custom">
             <div class="container">
-                <h1 class="breadcrumbs-custom-title">家用储能产品</h1>
+                <h1 class="breadcrumbs-custom-title">产品中心</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="grid-gallery.html">产品中心</a></li>
+                </ul>
             </div>
+            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>
         </div>
     </section>
 
     <section class="section section-sm section-fluid bg-default text-center">
         <div class="container-fluid isotope-wrap">
-            <h2 class="wow fadeInLeft">家用储能产品</h2>
+            <h2 class="wow fadeInLeft">产品中心</h2>
             <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">
-                家用储能产品家用储能产品家用储能产品家用储能产品家用储能产品家用储能产品</p>
+                致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p>
             </h4>
-            <div class="container">
+            <div class="row">
+                <div id="product-select" style="float: left;padding-left: 100px;padding-right: 100px;"
+                     class="col-md-12 col-lg-3 wow fadeInRight isotope-filters isotope-filters-horizontal">
+                    <button class="isotope-filters-toggle button button-md button-icon button-icon-right button-default-outline button-wapasha"
+                            data-custom-toggle="#isotope-3" data-custom-toggle-hide-on-blur="true"
+                            data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
+                    </button>
+                    <ul class="list list-categories" id="list-double" style="background-color: #cbcbcb">
 
-                <div class="row row-sm row-50 row-lg-80">
-                    <div class="col-12">
-                        <img src="http://www.huizhibattery.com/upload/image/2023/08/17/1503192188182.jpg"
-                             alt=""
-                             style="width: 100%; height: 100%; object-fit: cover;"/>
+                    </ul>
+
+                </div>
+                <div class="col-md-12 col-lg-9 wow fadeInRight">
+                    <div  class="row" style="display: flex; flex-wrap: wrap;">
+                        <div class="row">
+                            <div class="row" style="width: 100%;height: auto">
+                                <div id="product-list" class="col-md-12 col-lg-6 wow fadeInRight" style="width: 50%;height:auto;clear: both;">
+                                    <div class="col-sm-6 col-lg-4 col-xxl-3 fadeInLeft" data-filter="PRODUCT_ID" data-wow-delay=".1s" style="height: auto;width: 100%; margin-bottom: 20px;" >
+                                        <article class="thumbnail thumbnail-classic thumbnail-md" style="padding:0;margin: 0px;width: 100%;height: auto">
+                                            <div class="thumbnail-classic-figure">
+                                                <img id="img" src="" alt="${product.title}" style="height: auto;width: 100%"/>
+                                            </div>
+                                            <div class="thumbnail-classic-caption">
+                                                <div class="thumbnail-classic-title-wrap">
+                                                    <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
+                                                        <img src="" alt="${product.title}" style="height: auto;width: 100%"/>
+                                                    </a>
+                                                    <h5 class="thumbnail-classic-title"><a href="project-info.html?id=${product.id}">${product.title}</a></h5>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div  class="col-md-12 col-lg-6 wow fadeInRight" style="width: 50%;height:auto;clear: both;">
+                                    <div class="col-sm-6 col-lg-4 col-xxl-3 fadeInLeft" data-filter="PRODUCT_ID" data-wow-delay=".1s" style="height: auto;width: 100%; margin-bottom: 20px;">
+                                        <article class="thumbnail thumbnail-classic thumbnail-md" style="padding:0;margin: 0px;width: 100%;height: auto">
+                                            <div class="thumbnail-classic-figure">
+                                                <h3 id="text-one">${product.title}</h3>
+                                            </div>
+                                            <div id="text-two" class="col-sm-6 col-lg-4 col-xxl-3 fadeInLeft">${product.content}</div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="width: 100%;height: auto" id="excel-list">
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section section-xl bg-default">
-        <div class="container-fluid isotope-wrap">
-            <h2 class="wow fadeInLeft">应用场景</h2>
-            <div class="container">
-                <div class="row row-50 justify-content-center box-ordered">
-                    <div class="col-md-6 col-lg-5 col-xl-4">
-                        <!-- Services Classic-->
-                        <article class="services-classic"><a class="services-classic-figure"
-                                                             href="scenario-info.html"><img
-                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"
-                                height="297"/></a>
-                            <div class="services-classic-caption">
-                                <h4 class="services-classic-counter box-ordered-item"></h4>
-                                <h5 class="services-classic-title"><a href="scenario-info.html">家用储能解决方案一</a>
-                                </h5>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-md-6 col-lg-5 col-xl-4">
-                        <!-- Services Classic-->
-                        <article class="services-classic"><a class="services-classic-figure"
-                                                             href="scenario-info.html"><img
-                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"
-                                height="297"/></a>
-                            <div class="services-classic-caption">
-                                <h4 class="services-classic-counter box-ordered-item"></h4>
-                                <h5 class="services-classic-title"><a href="scenario-info.html">家用储能解决方案二</a>
-                                </h5>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-md-6 col-lg-5 col-xl-4">
-                        <!-- Services Classic-->
-                        <article class="services-classic"><a class="services-classic-figure"
-                                                             href="scenario-info.html"><img
-                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"
-                                height="297"/></a>
-                            <div class="services-classic-caption">
-                                <h4 class="services-classic-counter box-ordered-item"></h4>
-                                <h5 class="services-classic-title"><a href="scenario-info.html">家用储能解决方案三</a>
-                                </h5>
-                            </div>
-                        </article>
-                    </div>
-
+    <section class="section section-xl bg-default" style="margin-top: 0;padding-top: 0">
+        <div class="container">
+            <h2>应用场景</h2>
+            <div class="row row-50 justify-content-center box-ordered">
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <!-- Services Classic-->
+                    <article class="services-classic"><a class="services-classic-figure"
+                                                         href="../../front/cn/pricing.html"><img
+                            src="../../picture/OIP-C (3).jpg" alt=""
+                            width="370" height="297"/></a>
+                        <div class="services-classic-caption">
+                            <h4 class="services-classic-counter box-ordered-item"></h4>
+                            <h5 class="services-classic-title">应用场景1</h5>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <!-- Services Classic-->
+                    <article class="services-classic"><a class="services-classic-figure"
+                                                         href="../../front/cn/pricing.html"><img
+                            src="../../picture/OIP-C.jpg" alt=""
+                            width="370" height="297"/></a>
+                        <div class="services-classic-caption">
+                            <h4 class="services-classic-counter box-ordered-item"></h4>
+                            <h5 class="services-classic-title">应用场景2</h5>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-md-6 col-lg-5 col-xl-4">
+                    <!-- Services Classic-->
+                    <article class="services-classic"><a class="services-classic-figure"
+                                                         href="../../front/cn/pricing.html"><img
+                            src="../../picture/OIP-C (1).jpg" alt=""
+                            width="370" height="297"/></a>
+                        <div class="services-classic-caption">
+                            <h4 class="services-classic-counter box-ordered-item"></h4>
+                            <h5 class="services-classic-title">应用场景3</h5>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Page Footer-->
+    <footer class="section section-fluid footer-classic">
+        <div class="container-fluid bg-gray-15">
+            <div class="row justify-content-center row-30">
+                <div class="col-md-10 col-lg-12 col-xl-4 wow fadeInRight">
+                    <div class="box-footer box-footer-small">
+                        <div class="footer-brand"><a href="index.html"><img src="images/logo-inverse-191x52.png" alt=""
+                                                                            width="191" height="52"/></a></div>
+                        <p class="text-width-medium">Our company has been developing high-quality and reliable software
+                            for corporate needs since 2008. We are renowned professionals of software development.</p>
+                        <div class="contact-classic">
+                            <div class="contact-classic-item">
+                                <div class="unit unit-spacing-md align-items-center">
+                                    <div class="unit-left">
+                                        <h6 class="contact-classic-title">Address</h6>
+                                    </div>
+                                    <div class="unit-body contact-classic-link"><a href="#">4730 Crystal Springs Dr, Los
+                                        Angeles, CA 90027</a></div>
+                                </div>
+                            </div>
+                            <div class="contact-classic-item">
+                                <div class="unit unit-spacing-md align-items-center">
+                                    <div class="unit-left">
+                                        <h6 class="contact-classic-title">Phones</h6>
+                                    </div>
+                                    <div class="unit-body contact-classic-link"><a href="tel:#">+1 323-913-4688</a>, <a
+                                            href="tel:#"> +1 323-888-4554</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-classic-item">
+                                <div class="unit unit-spacing-md align-items-center">
+                                    <div class="unit-left">
+                                        <h6 class="contact-classic-title">E-mails</h6>
+                                    </div>
+                                    <div class="unit-body contact-classic-link"><a href="mailto:#">
+                                        info@demolink.org</a>, <a href="mailto:#"> mail@demolink.org</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-inline list-inline-sm footer-social-list">
+                            <li><a class="icon fa fa-facebook" href="#"></a></li>
+                            <li><a class="icon fa fa-twitter" href="#"></a></li>
+                            <li><a class="icon fa fa-google-plus" href="#"></a></li>
+                            <li><a class="icon fa fa-instagram" href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-4 wow fadeInRight" data-wow-delay=".1s">
+                    <div class="box-footer">
+                        <h3 class="fw-normal">Questions? Contact Us</h3>
+                        <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact"
+                              method="post" action="bat/rd-mailform.php">
+                            <div class="form-wrap">
+                                <input class="form-input" id="contact-name-6" type="text" name="name"
+                                       data-constraints="@Required"/>
+                                <label class="form-label" for="contact-name-6">Name</label>
+                            </div>
+                            <div class="form-wrap">
+                                <input class="form-input" id="contact-email-6" type="email" name="email"
+                                       data-constraints="@Email @Required"/>
+                                <label class="form-label" for="contact-email-6">E-mail</label>
+                            </div>
+                            <div class="form-wrap">
+                                <label class="form-label" for="contact-message-6">Message</label>
+                                <textarea class="form-input" id="contact-message-6" name="message"
+                                          data-constraints="@Required"></textarea>
+                            </div>
+                            <button class="button button-block button-primary" type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-4 wow fadeInRight" data-wow-delay=".2s">
+                    <div class="box-footer">
+                        <h3 class="fw-normal">What We Offer</h3>
+                        <ul class="footer-list-category">
+                            <li class="heading-4"><a href="#">DB Management<span></span></a></li>
+                            <li class="heading-4"><a href="#">iOS/MacOS<span></span></a></li>
+                            <li class="heading-4"><a href="#">Android Apps<span></span></a></li>
+                            <li class="heading-4"><a href="#">Windows Apps<span></span></a></li>
+                            <li class="heading-4"><a href="#">UX & UI<span></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom-panel wow fadeInUp">
+            <!-- Rights-->
+            <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span> <span>DreamSoft</span>. All
+                rights reserved. <a href="privacy-policy.html"> Privacy Policy.</a> <a target="_blank"
+                                                                                       href="https://www.mobanwang.com/"
+                                                                                       title="网站模板">网站模板</a>
+            </p>
+        </div>
+    </footer>
 </div>
 <!-- Global Mailform Output-->
 <div class="snackbars" id="form-output-global"></div>
 <!-- Javascript-->
 <script src="js/core.min.js"></script>
 <script src="js/script.js"></script>
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="../../backend/js/request.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+<script>
+    const filters = document.querySelectorAll('#isotope-3 a');
+
+    // 为每个过滤器链接添加点击事件监听器
+    filters.forEach(function (filter) {
+        filter.addEventListener('click', function (event) {
+            // 阻止链接的默认行为（即跳转）
+            event.preventDefault();
+            const filterValue = filter.getAttribute('data-isotope-filter');
+            console.log('被点击的过滤器值:', filterValue);
+            filters.forEach(f => f.classList.remove('active'));
+            filter.classList.add('active');
+        });
+    });
+
+    function getQueryParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // 使用示例
+    const id = getQueryParameterByName('id');
+
+    window.onload = function () {
+        fetchProductsByType();
+        queryById(id);
+
+    };
+
+    async function queryById(id) {
+        // 发送GET请求到后端API
+        const response = await fetch(`/cn/product/${id}`, {
+            method: 'GET', // 请求方法
+        });
+        const data = await response.json();
+
+        const imageUrl = `/common/download?name=`+data.data.url;
+        const excelUrl = `/common/download?name=`+data.data.picture;
+        fetchExcelFile(excelUrl);
+        const textOne = data.data.title;
+        const textTwo = data.data.content;
+
+        document.getElementById('img').src = imageUrl;
+        document.getElementById('text-one').textContent = textOne;
+        document.getElementById('text-two').textContent = textTwo;
+    }
+
+    function fetchProductsByType(type) {
+        axios.get('/cn/product/list/name')
+            .then(response => {
+                    const data = response.data.data;
+                    console.log(data);
+                    // 获取产品列表容器并清空现有内容
+                    const listDouble = document.getElementById('list-double');
+                    listDouble.innerHTML = '';
+
+                    // 渲染产品项
+                    data.forEach((product, index) => {
+                            const productAll = document.createElement('div');
+                            productAll.innerHTML = `
+                                <li>
+                                    <a id="filter-all" href="project-info.html?id=${product.id}" data-isotope-filter="*" data-isotope-group="gallery" data-type="all" >${product.title}</a>
+                                </li>`;
+
+                            listDouble.appendChild(productAll);
+                        }
+                    )
+                }
+            )
+    }
+
+    // 获取Excel文件内容并将其渲染到指定的表格容器中
+    function fetchExcelFile(url) {
+        fetch(url)
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                const workbook = XLSX.read(new Uint8Array(data), {type: 'array'});
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+
+                // 将工作表转换为HTML表格
+                const htmlTable = XLSX.utils.sheet_to_html(sheet);
+                document.getElementById("excel-list").innerHTML = htmlTable;  // 插入到指定的容器中
+            })
+            .catch(error => console.error(error));
+    }
+
+    // 示例调用
+</script>
 </body>
 </html>

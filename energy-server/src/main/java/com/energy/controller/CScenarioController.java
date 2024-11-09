@@ -101,4 +101,12 @@ public class CScenarioController {
 
         return Result.success(list);
     }
+
+    @GetMapping("/picture/{id}")
+    public Result<String> getPicture(@PathVariable Long id){
+
+        CScenario scenario = scenarioService.getById(id);
+
+        return Result.success(scenario.getPicture());
+    }
 }
