@@ -351,30 +351,36 @@
             <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">
                 致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p>
             </h4>
-            <div class="isotope-filters isotope-filters-horizontal">
+        <div class="row">
+            <div id="product-select" style="float: left;padding-left: 100px;padding-right: 100px;" class="col-md-12 col-lg-3 wow fadeInRight isotope-filters isotope-filters-horizontal">
                 <button class="isotope-filters-toggle button button-md button-icon button-icon-right button-default-outline button-wapasha"
                         data-custom-toggle="#isotope-3" data-custom-toggle-hide-on-blur="true"
                         data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
                 </button>
-                <ul class="isotope-filters-list" id="isotope-3">
-                    <li><a id="filter-all" class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery"
-                           data-type="all">全部产品</a></li>
-                    <li><a id="filter-type1" href="#" data-isotope-filter="1" data-isotope-group="gallery"
-                           data-type="1">家用储能</a></li>
-                    <li><a id="filter-type2" data-isotope-filter="2" data-isotope-group="gallery"
-                           data-type="2">工商业储能</a></li>
-                    <li><a id="filter-type3" data-isotope-filter="3" data-isotope-group="gallery"
-                           data-type="3">动力电池铅改锂</a></li>
-                    <li><a id="filter-type4" data-isotope-filter="4" data-isotope-group="gallery"
-                           data-type="4">新能源汽车充电桩</a></li>
-                    <li><a id="filter-type5" data-isotope-filter="5" data-isotope-group="gallery"
-                           data-type="5">光储充一体EPC</a>
-                    </li>
-                </ul>
+<!--                <div style="float: left;padding: 100px;" class="col-md-12 col-lg-3 wow fadeInRight">-->
+                    <ul class="isotope-filters-list" id="isotope-3" style="background-color: #e8e7e7">
+                        <li style="margin-bottom: 20px;margin-top: 20px;border: none"><a id="filter-all" class="active" href="#" data-isotope-filter="*" data-isotope-group="gallery"
+                               data-type="all">全部产品</a></li>
+                        <li style="margin-bottom: 20px;border: none"><a id="filter-type1" href="#" data-isotope-filter="1" data-isotope-group="gallery"
+                               data-type="1">家用储能</a></li>
+                        <li style="margin-bottom: 20px;border: none"><a id="filter-type2" href="#" data-isotope-filter="2" data-isotope-group="gallery"
+                               data-type="2">工商业储能</a></li>
+                        <li style="margin-bottom: 20px;border: none"><a id="filter-type3" href="#" data-isotope-filter="3" data-isotope-group="gallery"
+                               data-type="3">动力电池铅改锂</a></li>
+                        <li style="margin-bottom: 20px;border: none"><a id="filter-type4" href="#" data-isotope-filter="4" data-isotope-group="gallery"
+                               data-type="4">新能源汽车充电桩</a></li>
+                        <li style="margin-bottom: 20px;border: none"><a id="filter-type5" href="#" data-isotope-filter="5" data-isotope-group="gallery"
+                               data-type="5">光储充一体EPC</a>
+                        </li>
+                    </ul>
+<!--                </div>-->
+
             </div>
-            <div class="row row-30 isotope" data-isotope-layout="fitRows" data-isotope-group="gallery"
-                 data-lightgallery="group" id="product-list">
+            <div id="product-list" class="col-md-5 col-lg-3 wow fadeInRight" style="width: auto;height:auto;clear: both;">
             </div>
+            <div id="product-info" class="col-md-5 col-lg-3 wow fadeInRight" style="width: auto;height:auto;clear: both;">
+            </div>
+        </div>
         </div>
     </section>
 
@@ -483,6 +489,20 @@
 <script src="../../backend/plugins/axios/axios.min.js"></script>
 <script src="../../backend/js/request.js"></script>
 <script>
+    const filters = document.querySelectorAll('#isotope-3 a');
+
+    // 为每个过滤器链接添加点击事件监听器
+    filters.forEach(function(filter) {
+        filter.addEventListener('click', function(event) {
+            // 阻止链接的默认行为（即跳转）
+            event.preventDefault();
+            const filterValue = filter.getAttribute('data-isotope-filter');
+            console.log('被点击的过滤器值:', filterValue);
+            filters.forEach(f => f.classList.remove('active'));
+            filter.classList.add('active');
+        });
+    });
+
     // 初始加载所有产品
     fetchProductsByType(null); // 默认加载所有产品
 
@@ -534,25 +554,30 @@
                 // 获取产品列表容器并清空现有内容
                 const productList = document.getElementById('product-list');
                 productList.innerHTML = '';
+                const productInfo = document.getElementById('product-info');
+                productInfo.innerHTML = '';
 
                 // 渲染产品项
                 data.forEach(product => {
                     const productElement = document.createElement('div');
-                    productElement.classList.add('col-sm-6', 'col-lg-4', 'col-xxl-3', 'isotope-item', 'wow', 'fadeInLeft');
+                    productElement.classList.add('col-sm-6', 'col-lg-4', 'col-xxl-3',  'fadeInLeft');
                     productElement.setAttribute('data-filter', product.id);
                     productElement.setAttribute('data-wow-delay', '.1s');
+                    productElement.style.width = '100%';
+                    productElement.style.marginBottom = '20px';
                     // const imgUrl = "../../picture" + product.url;
                     const imgUrl = `/common/download?name=${product.url}`;
+
 
                     productElement.innerHTML = `
                 <article class="thumbnail thumbnail-classic thumbnail-md">
                     <div class="thumbnail-classic-figure">
-                        <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                        <img src="${imgUrl}" alt="${product.title}" style="height: 100%;width: 100%"/>
                     </div>
                     <div class="thumbnail-classic-caption">
                         <div class="thumbnail-classic-title-wrap">
                             <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
-                                <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
+                                <img src="${imgUrl}" alt="${product.title}" style="height: 100%;width: 100%"/>
                             </a>
                             <h5 class="thumbnail-classic-title"><a href="project-info.html?id=${product.id}">${product.title}</a></h5>
                         </div>
@@ -561,6 +586,35 @@
                 </article>
             `;
                     productList.appendChild(productElement);
+
+
+                    const productInfoElement = document.createElement('div');
+                    productInfoElement.classList.add('col-sm-6', 'col-lg-4', 'col-xxl-3',  'fadeInLeft');
+                    productInfoElement.setAttribute('data-filter', product.id);
+                    productInfoElement.setAttribute('data-wow-delay', '.1s');
+                    productInfoElement.style.width = '100%';
+                    productInfoElement.style.marginBottom = '20px';
+                    // const imgUrl = "../../picture" + product.url;
+                    const picture = `/common/download?name=${product.picture}`;
+
+                    productInfoElement.innerHTML = `
+                <article class="thumbnail thumbnail-classic thumbnail-md">
+                    <div class="thumbnail-classic-figure">
+                        <img src="${picture}" alt="${product.title}" style="height: 100%;width: 100%"/>
+                    </div>
+                    <div class="thumbnail-classic-caption">
+                        <div class="thumbnail-classic-title-wrap">
+                            <a class="icon fl-bigmug-line-zoom60" href="${picture}" data-lightgallery="item">
+                                <img src="${picture}" alt="${product.title}" style="height: 100%;width: 100%"/>
+                            </a>
+                            <h5 class="thumbnail-classic-title"><a href="project-info.html?id=${product.id}">${product.title}</a></h5>
+                        </div>
+                        <p class="thumbnail-classic-text">${product.content}</p>
+                    </div>
+                </article>
+            `;
+                    productInfo.appendChild(productInfoElement);
+
                 });
 
                 // 触发 Isotope 更新
