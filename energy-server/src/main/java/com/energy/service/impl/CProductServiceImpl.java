@@ -74,7 +74,33 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
         return product;
     }
 
+    @Override
+    public void saveByListId(CProduct product) {
+        product.setScenarioId(processLastWord(product.getScenarioId()));
+        this.save(product);
+    }
 
+    @Override
+    public void updateByListId(CProduct product) {
+        product.setScenarioId(processLastWord(product.getScenarioId()));
+        this.updateById(product);
+    }
+
+    public String processLastWord(String input) {
+        // 判断输入是否为空
+        if (input == null || input.isEmpty()) {
+            return input; // 如果为空，直接返回原始字符串
+        }
+
+        // 判断最后一个字符是否是中文逗号
+        if (input.endsWith(",")||input.endsWith("，")) {
+            // 如果是中文逗号，去掉最后一个字符
+            return input.substring(0, input.length() - 1);
+        }
+
+        // 如果不是中文逗号，直接返回原字符串
+        return input;
+    }
 }
 
 

@@ -28,7 +28,7 @@ public class CProductController {
     @PostMapping
     public Result<String> save(@RequestBody CProduct product) {
         product.setCreateTime(LocalDateTime.now());
-        productService.save(product);
+        productService.saveByListId(product);
         return Result.success(MessageConstant.ADD_SUC);
     }
 
@@ -59,7 +59,7 @@ public class CProductController {
 
     @PutMapping
     public Result<String> update(@RequestBody CProduct product){
-        productService.updateById(product);
+        productService.updateByListId(product);
 
         return Result.success(MessageConstant.EDIT_SUCCESS);
     }

@@ -20,4 +20,8 @@ public interface CProductService extends IService<CProduct> {
     List<CProduct> orderByType(String type);
 
     CProduct getDifferById(Long id);
+
+    void saveByListId(CProduct product);
+
+    void updateByListId(CProduct product);
 }
