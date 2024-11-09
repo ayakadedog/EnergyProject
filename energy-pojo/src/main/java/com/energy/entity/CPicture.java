@@ -19,5 +19,8 @@ public class CPicture implements Serializable {
 
     private String picture;
 
+    private String content;
+
+    private String title;
     private static final long serialVersionUID = 1L;
 }

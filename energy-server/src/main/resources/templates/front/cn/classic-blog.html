@@ -325,18 +325,20 @@
         </div>
     </header>
     <!-- Breadcrumbs -->
-    <section class="breadcrumbs-custom-inset">
-        <div class="breadcrumbs-custom">
-            <div class="container">
-                <h1 class="breadcrumbs-custom-title">服 务 & 支 持</h1>
-                <ul class="breadcrumbs-custom-path">
-                    <li><a href="index.html">首页</a></li>
-                    <li class="active">服务&支持</li>
-                </ul>
-            </div>
-            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>
-        </div>
-    </section>
+<!--    <section class="breadcrumbs-custom-inset">-->
+<!--        <div class="breadcrumbs-custom">-->
+<!--            <div class="container">-->
+<!--                <h1 class="breadcrumbs-custom-title">服 务 & 支 持</h1>-->
+<!--                <ul class="breadcrumbs-custom-path">-->
+<!--                    <li><a href="index.html">首页</a></li>-->
+<!--                    <li class="active">服务&支持</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>-->
+<!--        </div>-->
+<!--    </section>-->
+    <div class="background" id="backgroundDiv" style="width: 100vw; height: 60vh; background-size: cover; background-position: center;"></div>
+
     <!-- Classic blog-->
     <section class="section section-xl bg-default text-md-start">
         <div class="container">
@@ -548,6 +550,21 @@
         queryPage();
     }
 
+    const type = '服务支持';  // 这里替换成实际的 type 参数值
+    // 请求后台接口获取图片路径
+    axios.get(`/cn/picture/${type}`)
+        .then(response => {
+            const backgroundUrl = response.data.data.picture;  // 假设返回的图片路径在 data 字段中
+            console.log('Background Image URL:', backgroundUrl);
+            // 设置背景图片
+            const backgroundDiv = document.getElementById('backgroundDiv');
+            // 这里使用模板字符串将 backgroundUrl 的值拼接到 URL 中
+            const imgUrl = `/common/download?name=${backgroundUrl}`;
+            backgroundDiv.style.backgroundImage = `url(${imgUrl})`;
+        })
+        .catch(error => {
+            console.error('Error fetching background image:', error);
+        });
     // 为每个链接添加点击事件监听器
     links.forEach(link => {
         link.addEventListener('click', function (event) {

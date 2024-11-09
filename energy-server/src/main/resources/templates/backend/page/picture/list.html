@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../../styles/common.css"/>
+    <link rel="stylesheet" href="../../styles/page.css"/>
+    <style>
+        #member-app .notAdmin::after {
+            border: 0 !important;
+
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container" id="member-app">
+    <div class="container">
+        <el-table
+                :data="tableData"
+                stripe
+                class="tableBox"
+        >
+
+            <el-table-column
+                    prop="id"
+                    label="id"
+            ></el-table-column>
+
+            <el-table-column
+                    prop="name"
+                    label="页面名称"
+            ></el-table-column>
+            <el-table-column
+                    prop="title"
+                    label="标题描述"
+            ></el-table-column>
+            <el-table-column
+                    prop="content"
+                    label="描述"
+            ></el-table-column>
+
+            <el-table-column prop="image" label="图片" align="center">
+                <template slot-scope="{ row }">
+                    <el-image style="width: auto; height: 40px; border:none;cursor: pointer;"
+                              :src="getImage(row.picture)"
+                              :preview-src-list="[ `/common/download?name=${row.picture}` ]">
+                        <div slot="error" class="image-slot">
+                            <img src="../../images/noImg.png" style="width: auto; height: 40px; border:none;">
+                        </div>
+                    </el-image>
+                </template>
+            </el-table-column>
+
+            <el-table-column
+                    label="操作"
+                    width="160"
+                    align="center"
+            >
+                <template slot-scope="scope">
+                    <el-button
+                            type="text"
+                            size="small"
+                            class="blueBug"
+                            @click="addMemberHandle(scope.row.id)"
+                    >
+                        编辑
+                    </el-button>
+                </template>
+            </el-table-column>
+
+        </el-table>
+
+        <el-pagination
+                class="pageList"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="counts"
+                :current-page.sync="page"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+        ></el-pagination>
+    </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../plugins/axios/axios.min.js"></script>
+<script src="../../js/request.js"></script>
+<script src="../../api/picture.js"></script>
+<script>
+    new Vue({
+        el: '#member-app',
+        data() {
+            return {
+                input: '',
+                counts: 0,
+                page: 1,
+                pageSize: 10,
+                tableData: [],
+                id: '',
+                status: '',
+            }
+        },
+        computed: {},
+        created() {
+            this.init()
+            this.user = JSON.parse(localStorage.getItem('userInfo')).username
+        },
+        mounted() {
+        },
+        methods: {
+            async init() {
+                const params = {
+                    page: this.page,
+                    pageSize: this.pageSize,
+                    name: this.input ? this.input : undefined
+                }
+                await getPictureList(params).then(res => {
+                    if (String(res.code) === '20000') {
+                        this.tableData = res.data.records || []
+                        this.counts = res.data.total
+                    }
+                }).catch(err => {
+                    this.$message.error('请求出错了：' + err)
+                })
+            },
+            handleQuery() {
+                this.page = 1;
+                this.init();
+            },
+            // 添加
+            addMemberHandle(st) {
+                window.parent.menuHandle({
+                    url: '/templates/backend/page/picture/add.html?id=' + st
+                }, true)
+            },
+            handleSizeChange(val) {
+                this.pageSize = val
+                this.init()
+            },
+            handleCurrentChange(val) {
+                this.page = val
+                this.init()
+            },
+            getImage(image) {
+                return `/common/download?name=${image}`
+            }
+        }
+    })
+</script>
+</body>
+</html>

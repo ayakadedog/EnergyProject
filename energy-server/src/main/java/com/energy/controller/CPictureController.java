@@ -1,7 +1,9 @@
 package com.energy.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.energy.constant.MessageConstant;
+import com.energy.entity.CHome;
 import com.energy.entity.CPicture;
 import com.energy.result.Result;
 import com.energy.service.CPictureService;
@@ -17,15 +19,14 @@ import javax.annotation.Resource;
 public class CPictureController {
 
     @Resource
-    private CPictureServiceImpl pictureService;
+    private CPictureService pictureService;
 
     @GetMapping("/{type}")
-    public Result<String> get(@PathVariable String type){
+    public Result<CPicture> get(@PathVariable String type){
 
         LambdaQueryWrapper<CPicture> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(CPicture::getName,type);
-        String picture = pictureService.getOne(lambdaQueryWrapper).getPicture();
-        return Result.success(picture);
+        return Result.success(pictureService.getOne(lambdaQueryWrapper));
     }
 
     @PutMapping
@@ -34,4 +35,14 @@ public class CPictureController {
 
         return Result.success(MessageConstant.EDIT_SUCCESS);
     }
+
+    @GetMapping("/page")
+    public Result<Page> homeInfo(int page, int pageSize) {
+        return Result.success(pictureService.getHomeInfo(page,pageSize));
+    }
+    @GetMapping("/info/{id}")
+    public Result<CPicture> homeInfo(@PathVariable Long id){
+        return Result.success(pictureService.getById(id));
+    }
+
 }

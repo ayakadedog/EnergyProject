@@ -1,7 +1,9 @@
 package com.energy.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.energy.entity.CPicture;
+import com.energy.entity.CProduct;
 
 /**
 * @author lenovo
@@ -10,4 +12,5 @@ import com.energy.entity.CPicture;
 */
 public interface CPictureService extends IService<CPicture> {
 
+    Page<CPicture> getHomeInfo(int page, int pageSize);
 }

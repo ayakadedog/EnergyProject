@@ -792,7 +792,7 @@
 
 
     // 发送请求并渲染产品数据
-    function fetchProductsByType(type) {
+    async function fetchProductsByType(type) {
         axios.get('/cn/product/type', {
             params: {
                 type: type // 传递产品类型参数
@@ -852,7 +852,7 @@
 
 
     // 发送请求并渲染数据
-    function fetchScenarioByType(type) {
+    async function fetchScenarioByType(type) {
         axios.get('/cn/scenario/type', {
             params: {
                 type: type // 传递产品类型参数
