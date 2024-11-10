@@ -332,19 +332,20 @@
         </div>
     </header>
     <!-- Breadcrumbs -->
-<!--    <section class="breadcrumbs-custom-inset">-->
-<!--        <div class="breadcrumbs-custom">-->
-<!--            <div class="container">-->
-<!--                <h1 class="breadcrumbs-custom-title">产品中心</h1>-->
-<!--                <ul class="breadcrumbs-custom-path">-->
-<!--                    <li><a href="index.html">首页</a></li>-->
-<!--                    <li><a href="grid-gallery.html">产品中心</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>-->
-<!--        </div>-->
-<!--    </section>-->
-    <div class="background" id="backgroundDiv" style="width: 100vw; height: 60vh; background-size: cover; background-position: center;"></div>
+    <!--    <section class="breadcrumbs-custom-inset">-->
+    <!--        <div class="breadcrumbs-custom">-->
+    <!--            <div class="container">-->
+    <!--                <h1 class="breadcrumbs-custom-title">产品中心</h1>-->
+    <!--                <ul class="breadcrumbs-custom-path">-->
+    <!--                    <li><a href="index.html">首页</a></li>-->
+    <!--                    <li><a href="grid-gallery.html">产品中心</a></li>-->
+    <!--                </ul>-->
+    <!--            </div>-->
+    <!--            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>-->
+    <!--        </div>-->
+    <!--    </section>-->
+    <div class="background" id="backgroundDiv"
+         style="width: 100vw; height: 60vh; background-size: cover; background-position: center;"></div>
 
     <section class="section section-sm section-fluid bg-default text-center">
         <div class="container-fluid isotope-wrap">
@@ -570,6 +571,8 @@
 
                     productElement.innerHTML = `
                 <article class="thumbnail thumbnail-classic thumbnail-md">
+                    <a href="project-info.html?id=${product.id}" style="color: inherit; text-decoration: none;">
+
                     <div class="thumbnail-classic-figure">
                         <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
                     </div>
@@ -577,13 +580,9 @@
                             <a href="project-info.html?id=${product.id}" style="color: inherit; text-decoration: none;">${product.title}</a>
                      </h3>
                     <div class="thumbnail-classic-caption" style=" position: absolute; height: 160%; bottom: 0; width: 100%; background-color: rgba(255, 255, 255, 0);">
-                        <div class="thumbnail-classic-title-wrap">
-                            <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
-                                <img src="${imgUrl}" alt="${product.title}" width="420" height="350"/>
-                            </a>
-                        </div>
                         <p class="thumbnail-classic-text"><h4>${product.content}</h4></p>
                     </div>
+                    </a>
                 </article>
             `;
                     productList.appendChild(productElement);

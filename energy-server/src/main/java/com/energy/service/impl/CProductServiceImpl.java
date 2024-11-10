@@ -50,11 +50,22 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
         queryWrapper.orderByDesc(CProduct::getCreateTime);
         this.page(pageInfo, queryWrapper);
         pageInfo.getRecords().forEach(record -> {
-            // 假设 CProduct 中有 getCScenarioId 方法，并且 scenarioService.getById 返回 Scenario 对象
+            // 获取 scenario 的 title
             String scenarioTitle = scenarioService.getById(record.getScenarioId()).getTitle();
-            // 将 scenario 的 title 设置到 CProduct 中（假设 CProduct 中有 setScenarioTitle 方法）
+
+            // 截取 content 内容，如果超过 10 个字则加上 "..."
+            String content = record.getContent();
+            if (content.length() > 10) {
+                content = content.substring(0, 10) + "...";
+            }
+            // 将截取后的 content 重新设置到 record 中
+            record.setContent(content);
+
+            // 将 scenario 的 title 设置到 CProduct 中
             record.setScenario(scenarioTitle);
         });
+
+
 
         return pageInfo;
 
@@ -64,7 +75,20 @@ public class CProductServiceImpl extends ServiceImpl<CProductMapper, CProduct>
     public List<CProduct> orderByType(String type) {
         LambdaQueryWrapper<CProduct> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(type != null, CProduct::getScenarioId, type);
-        return this.list(queryWrapper);
+        List<CProduct> list = this.list(queryWrapper);
+            list.forEach(product -> {
+
+            String content = product.getContent();
+            if (content.length() > 10) {
+                content = content.substring(0, 10) + "..."; // 截取前 10 个字符，并加上 "..."
+            }
+
+            // 将 content 设置回 record
+                product.setContent(content);
+
+        });
+
+        return list;
     }
 
     @Override

@@ -355,26 +355,12 @@
             </nav>
         </div>
     </header>
-    <!-- Breadcrumbs -->
-    <section class="breadcrumbs-custom-inset">
-        <div class="breadcrumbs-custom">
-            <div class="container">
-                <h1 class="breadcrumbs-custom-title">产品中心</h1>
-                <ul class="breadcrumbs-custom-path">
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="grid-gallery.html">产品中心</a></li>
-                </ul>
-            </div>
-            <div class="box-position" style="background-image: url(images/bg-elements.jpg);"></div>
-        </div>
-    </section>
+
+    <div class="background" id="backgroundDiv"
+         style="width: 100vw; height: 60vh; background-size: cover; background-position: center;"></div>
 
     <section class="section section-sm section-fluid bg-default text-center">
         <div class="container-fluid isotope-wrap">
-<!--            <h2 class="wow fadeInLeft">产品中心</h2>-->
-<!--            <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">-->
-<!--                致力于磷酸铁锂电池，储能系统，光伏系统，以及相关太阳能产品的生产，研发和销售</p>-->
-<!--            </h4>-->
             <div class="row">
                 <div id="product-select" style="float: left;padding-left: 100px;padding-right: 100px;"
                      class="col-md-12 col-lg-3 wow fadeInRight isotope-filters isotope-filters-horizontal">
@@ -382,9 +368,14 @@
                             data-custom-toggle="#isotope-3" data-custom-toggle-hide-on-blur="true"
                             data-custom-toggle-disable-on-blur="true"><span class="icon fa fa-caret-down"></span>Filter
                     </button>
-                    <ul class="list list-categories" id="list-double" style="background-color: #cbcbcb">
+                    <div class="post-sidebar-item">
+                        <div class="post-sidebar-item-inset">
+                            <ul class="list list-categories" id="list-double">
 
-                    </ul>
+                            </ul>
+                        </div>
+                    </div>
+
 
                 </div>
                 <div class="col-md-12 col-lg-9 wow fadeInRight">
@@ -397,14 +388,6 @@
                                             <div class="thumbnail-classic-figure">
                                                 <img id="img" src="" alt="${product.title}" style="height: auto;width: 100%"/>
                                             </div>
-                                            <div class="thumbnail-classic-caption">
-                                                <div class="thumbnail-classic-title-wrap">
-                                                    <a class="icon fl-bigmug-line-zoom60" href="${imgUrl}" data-lightgallery="item">
-                                                        <img src="" alt="${product.title}" style="height: auto;width: 100%"/>
-                                                    </a>
-                                                    <h5 class="thumbnail-classic-title"><a href="project-info.html?id=${product.id}">${product.title}</a></h5>
-                                                </div>
-                                            </div>
                                         </article>
                                     </div>
                                 </div>
@@ -414,7 +397,7 @@
                                             <div class="thumbnail-classic-figure">
                                                 <h3 id="text-one">${product.title}</h3>
                                             </div>
-                                            <div id="text-two" class="col-sm-6 col-lg-4 col-xxl-3 fadeInLeft">${product.content}</div>
+                                            <div id="text-two" class="thumbnail-classic-figure">${product.content}</div>
                                         </article>
                                     </div>
                                 </div>
@@ -431,46 +414,12 @@
         </div>
     </section>
 
+
     <section class="section section-xl bg-default" style="margin-top: 0;padding-top: 0">
         <div class="container">
             <h2>应用场景</h2>
-            <div class="row row-50 justify-content-center box-ordered">
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <!-- Services Classic-->
-                    <article class="services-classic"><a class="services-classic-figure"
-                                                         href="../../front/cn/pricing.html"><img
-                            src="../../picture/OIP-C (3).jpg" alt=""
-                            width="370" height="297"/></a>
-                        <div class="services-classic-caption">
-                            <h4 class="services-classic-counter box-ordered-item"></h4>
-                            <h5 class="services-classic-title">应用场景1</h5>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <!-- Services Classic-->
-                    <article class="services-classic"><a class="services-classic-figure"
-                                                         href="../../front/cn/pricing.html"><img
-                            src="../../picture/OIP-C.jpg" alt=""
-                            width="370" height="297"/></a>
-                        <div class="services-classic-caption">
-                            <h4 class="services-classic-counter box-ordered-item"></h4>
-                            <h5 class="services-classic-title">应用场景2</h5>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-md-6 col-lg-5 col-xl-4">
-                    <!-- Services Classic-->
-                    <article class="services-classic"><a class="services-classic-figure"
-                                                         href="../../front/cn/pricing.html"><img
-                            src="../../picture/OIP-C (1).jpg" alt=""
-                            width="370" height="297"/></a>
-                        <div class="services-classic-caption">
-                            <h4 class="services-classic-counter box-ordered-item"></h4>
-                            <h5 class="services-classic-title">应用场景3</h5>
-                        </div>
-                    </article>
-                </div>
+            <div class="row row-50 justify-content-center box-ordered" id="scenarios-container">
+                <!-- JavaScript 会在这里插入内容 -->
             </div>
         </div>
     </section>
@@ -582,6 +531,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
 
 <script>
+    const type = '产品中心详情页';  // 这里替换成实际的 type 参数值
+
+    // 请求后台接口获取图片路径
+    axios.get(`/cn/picture/${type}`)
+        .then(response => {
+            const backgroundUrl = response.data.data.picture;  // 假设返回的图片路径在 data 字段中
+            console.log('Background Image URL:', backgroundUrl);
+            // 设置背景图片
+            const backgroundDiv = document.getElementById('backgroundDiv');
+            // 这里使用模板字符串将 backgroundUrl 的值拼接到 URL 中
+            const imgUrl = `/common/download?name=${backgroundUrl}`;
+            backgroundDiv.style.backgroundImage = `url(${imgUrl})`;
+            // 更新标题和描述
+            const productTitle = document.getElementById('productTitle');
+            const productDescription = document.getElementById('productDescription');
+
+            productTitle.textContent = response.data.data.title;  // 更新 h2 内容
+            productDescription.textContent = response.data.data.content;  // 更新 h4 内容
+        })
+        .catch(error => {
+            console.error('Error fetching background image:', error);
+        });
+
     const filters = document.querySelectorAll('#isotope-3 a');
 
     // 为每个过滤器链接添加点击事件监听器
@@ -647,7 +619,7 @@
                             const productAll = document.createElement('div');
                             productAll.innerHTML = `
                                 <li>
-                                    <a id="filter-all" href="project-info.html?id=${product.id}" data-isotope-filter="*" data-isotope-group="gallery" data-type="all" >${product.title}</a>
+                                    <a id="filter-all" href="project-info.html?id=${product.id}" >${product.title}</a>
                                 </li>`;
 
                             listDouble.appendChild(productAll);
@@ -672,6 +644,43 @@
             })
             .catch(error => console.error(error));
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        if (id) {
+            // 向后端接口发送请求，获取相关场景数据
+            fetch(`/cn/scenario/about/scenario/${id}`)
+                .then(response => response.json())
+                .then(result => {
+                    const container = document.getElementById("scenarios-container");
+                    const scenarios = result.data;
+                    // 清空容器
+                    container.innerHTML = '';
+
+                    // 遍历场景数据并生成 HTML
+                    scenarios.forEach(scenario => {
+                        const imgUrl = `/common/download?name=${scenario.url}`;
+                        const scenarioHtml = `
+                        <div class="col-md-6 col-lg-5 col-xl-4">
+                            <article class="services-classic">
+                                <a class="services-classic-figure">
+                                    <img src="${imgUrl}" alt="" width="370" height="297"/>
+                                </a>
+                                <div class="services-classic-caption">
+                                    <h4 class="services-classic-counter box-ordered-item"></h4>
+                                    <h5 class="services-classic-title">${scenario.title}</h5>
+                                </div>
+                            </article>
+                        </div>
+                    `;
+                        // 将生成的 HTML 插入容器
+                        container.insertAdjacentHTML('beforeend', scenarioHtml);
+                    });
+                })
+                .catch(error => console.error('Error fetching scenarios:', error));
+        } else {
+            console.error("Product ID not found in URL");
+        }
+    });
 
     // 示例调用
 </script>

@@ -6,6 +6,7 @@ import com.energy.constant.MessageConstant;
 import com.energy.entity.CProduct;
 import com.energy.entity.CScenario;
 import com.energy.result.Result;
+import com.energy.service.CProductService;
 import com.energy.service.CScenarioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ import java.util.List;
 public class CScenarioController {
     @Resource
     private CScenarioService scenarioService;
+    @Resource
+    private CProductService productService;
     
     
     @PostMapping
@@ -108,5 +111,9 @@ public class CScenarioController {
         CScenario scenario = scenarioService.getById(id);
 
         return Result.success(scenario.getPicture());
+    }
+    @GetMapping("/about/scenario/{id}")
+    public Result<List<CScenario>> getAboutScenario(@PathVariable Long id){
+        return scenarioService.getAboutScenario(id);
     }
 }

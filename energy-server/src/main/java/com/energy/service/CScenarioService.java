@@ -2,6 +2,7 @@ package com.energy.service;
 
 import com.energy.entity.CScenario;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.energy.result.Result;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CScenarioService extends IService<CScenario> {
     void modifyStatus(Integer stu, List<Long> ids);
 
     List<CScenario> orderByType(String type);
+
+    Result<List<CScenario>> getAboutScenario(Long id);
 }

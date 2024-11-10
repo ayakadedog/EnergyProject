@@ -336,17 +336,20 @@
         </div>
     </header>
     <!-- Breadcrumbs -->
-    <section class="breadcrumbs-custom-inset">
-        <div class="breadcrumbs-custom"id="breadcrumbsSection">
-            <div class="container">
-                <h1 class="breadcrumbs-custom-title">家用储能应用场景</h1>
-                <ul class="breadcrumbs-custom-path">
-                    <li><a href="index.html">主页</a></li>
-                    <li class="active">产品一</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <div class="background" id="backgroundDiv"
+         style="width: 100vw; height: 60vh; background-size: cover; background-position: center;"></div>
+
+    <!--    <section class="breadcrumbs-custom-inset">-->
+<!--        <div class="breadcrumbs-custom"id="breadcrumbsSection">-->
+<!--            <div class="container">-->
+<!--                <h1 class="breadcrumbs-custom-title">家用储能应用场景</h1>-->
+<!--                <ul class="breadcrumbs-custom-path">-->
+<!--                    <li><a href="index.html">主页</a></li>-->
+<!--                    <li class="active">产品一</li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 
 
     <section class="section section-sm section-fluid bg-default text-center">
@@ -355,69 +358,9 @@
             <h4><p class="quote-jean wow fadeInRight" data-wow-delay=".1s">
                 家用储能产品家用储能产品家用储能产品家用储能产品家用储能产品家用储能产品</p>
             </h4>
-            <!--            <div class="container">-->
 
-            <!--                <div class="row row-sm row-50 row-lg-80">-->
-            <!--                    <div class="col-12">-->
-            <!--                        <img src="http://www.huizhibattery.com/upload/image/2023/08/17/1503192188182.jpg"-->
-            <!--                             alt=""-->
-            <!--                             style="width: 100%; height: 100%; object-fit: cover;"/>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </section>
-
-
-    <!--    <section class="section section-xl bg-default">-->
-    <!--        <div class="container-fluid isotope-wrap">-->
-    <!--            <h2 class="wow fadeInLeft">产品推荐</h2>-->
-    <!--            <div class="container">-->
-    <!--                <div class="row row-50 justify-content-center box-ordered">-->
-    <!--                    <div class="col-md-6 col-lg-5 col-xl-4">-->
-    <!--                        &lt;!&ndash; Services Classic&ndash;&gt;-->
-    <!--                        <article class="services-classic"><a class="services-classic-figure"-->
-    <!--                                                             href="project-info.html"><img-->
-    <!--                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"-->
-    <!--                                height="297"/></a>-->
-    <!--                            <div class="services-classic-caption">-->
-    <!--                                <h4 class="services-classic-counter box-ordered-item"></h4>-->
-    <!--                                <h5 class="services-classic-title"><a href="project-info.html">相关产品一</a>-->
-    <!--                                </h5>-->
-    <!--                            </div>-->
-    <!--                        </article>-->
-    <!--                    </div>-->
-    <!--                    <div class="col-md-6 col-lg-5 col-xl-4">-->
-    <!--                        &lt;!&ndash; Services Classic&ndash;&gt;-->
-    <!--                        <article class="services-classic"><a class="services-classic-figure"-->
-    <!--                                                             href="project-info.html"><img-->
-    <!--                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"-->
-    <!--                                height="297"/></a>-->
-    <!--                            <div class="services-classic-caption">-->
-    <!--                                <h4 class="services-classic-counter box-ordered-item"></h4>-->
-    <!--                                <h5 class="services-classic-title"><a href="project-info.html">相关产品二</a>-->
-    <!--                                </h5>-->
-    <!--                            </div>-->
-    <!--                        </article>-->
-    <!--                    </div>-->
-    <!--                    <div class="col-md-6 col-lg-5 col-xl-4">-->
-    <!--                        &lt;!&ndash; Services Classic&ndash;&gt;-->
-    <!--                        <article class="services-classic"><a class="services-classic-figure"-->
-    <!--                                                             href="project-info.html"><img-->
-    <!--                                src="https://hoenergypower.cn/upfiles/202111009827369.jpg" alt="" width="370"-->
-    <!--                                height="297"/></a>-->
-    <!--                            <div class="services-classic-caption">-->
-    <!--                                <h4 class="services-classic-counter box-ordered-item"></h4>-->
-    <!--                                <h5 class="services-classic-title"><a href="project-info.html">相关产品三</a>-->
-    <!--                                </h5>-->
-    <!--                            </div>-->
-    <!--                        </article>-->
-    <!--                    </div>-->
-
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </section>-->
 
 
 </div>
@@ -433,7 +376,28 @@
         const id = getQueryParameterByName('id');
         queryImage(id);
     };
+    const type = '应用场景详情';  // 这里替换成实际的 type 参数值
 
+    // 请求后台接口获取图片路径
+    axios.get(`/cn/picture/${type}`)
+        .then(response => {
+            const backgroundUrl = response.data.data.picture;  // 假设返回的图片路径在 data 字段中
+            console.log('Background Image URL:', backgroundUrl);
+            // 设置背景图片
+            const backgroundDiv = document.getElementById('backgroundDiv');
+            // 这里使用模板字符串将 backgroundUrl 的值拼接到 URL 中
+            const imgUrl = `/common/download?name=${backgroundUrl}`;
+            backgroundDiv.style.backgroundImage = `url(${imgUrl})`;
+            // 更新标题和描述
+            const productTitle = document.getElementById('productTitle');
+            const productDescription = document.getElementById('productDescription');
+
+            productTitle.textContent = response.data.data.title;  // 更新 h2 内容
+            productDescription.textContent = response.data.data.content;  // 更新 h4 内容
+        })
+        .catch(error => {
+            console.error('Error fetching background image:', error);
+        });
     function getQueryParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, '\\$&');
